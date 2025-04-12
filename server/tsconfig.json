@@ -1,0 +1,12 @@
+{
+    "extends": "@tsconfig/node22/tsconfig.json",
+    "include": ["**/*"],
+    "exclude": ["dist"],
+    "compilerOptions": {
+        "moduleResolution": "bundler", // Cambiar "bundler" por "node"
+        "module": "ESNext",
+        "outDir": "./dist",
+        "rootDir": ".",
+        "target": "ES6"
+    }
+}

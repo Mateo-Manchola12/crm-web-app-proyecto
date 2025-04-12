@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+export const prerender = false;
+import { getContextData } from "../utils/getContextData";
+
+const data = await getContextData(Astro);
+---
+
+<Layout title="Servidor">
+    <h1>
+        {data.message}
+    </h1>
+    <h2>Esta es una ruta dinámica generada desde el servidor de Express!</h2>
+</Layout>

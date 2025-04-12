@@ -1,0 +1,58 @@
+{
+    "name": "server",
+    "version": "0.0.1",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "start": "tsc && dotenvx run --env-file=./../.env.production -- node --conditions=production dist/index.js",
+        "dev": "dotenvx run --env-file=./../.env.development -- tsx --watch index.ts",
+        "build": "tsc",
+        "type-check": "tsc --noEmit"
+    },
+    "imports": {
+        "#*": {
+            "production": [
+                "./dist/src/*.js",
+                "./dist/src/*.jsx"
+            ],
+            "default": [
+                "./src/*",
+                "./src/*.ts",
+                "./src/*.tsx",
+                "./src/*.js",
+                "./src/*.jsx"
+            ]
+        }
+    },
+    "dependencies": {
+        "@dotenvx/dotenvx": "^1.39.1",
+        "astro": "^5.6.1",
+        "bcryptjs": "^3.0.2",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.5",
+        "dotenv": "^16.5.0",
+        "express": "^5.1.0",
+        "express-session": "^1.18.1",
+        "express-validator": "^7.2.1",
+        "knex": "^3.1.0",
+        "morgan": "^1.10.0",
+        "node-cron": "^3.0.3",
+        "passport": "^0.7.0",
+        "passport-local": "^1.0.0",
+        "pg": "^8.14.1",
+        "serve-favicon": "^2.5.0",
+        "winston": "^3.17.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.24.0",
+        "@tsconfig/node22": "^22.0.1",
+        "@types/express": "^5.0.1",
+        "@types/node": "^22.14.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-perfectionist": "^4.11.0",
+        "tsx": "^4.19.3",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.29.1"
+    }
+}

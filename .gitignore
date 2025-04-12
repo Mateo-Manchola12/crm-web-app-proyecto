@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Directorios de construcción
+dist/
+build/
+*.log
+*.tmp
+*.eslintcache
+
+# Archivos de entorno
+.env
+.env.development
+.env.production
+
+# generated types
+*.astro/
+
+# Archivos específicos de VSCode
+.vscode/
+
+# Archivos específicos de IDEs
+.idea/
+
+# Archivos generados por Astro
+client/.next/
+client/out/
+
+# Archivos generados por el servidor
+server/dist/
+server/build/
+
+# Otros archivos innecesarios
+*.bak
+*.swp
