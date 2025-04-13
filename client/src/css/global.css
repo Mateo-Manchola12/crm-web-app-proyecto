@@ -7,3 +7,18 @@
     margin: 0;
     padding: 0;
 }
+
+@theme {
+    --color-background: #ffffff;
+    --color-foreground: #2b153d;
+    --color-primary: #b29cf2;
+    --color-primary-foreground: #f7f3ff;
+    --color-secondary: #9985c0;
+    --color-secondary-foreground: #f7f3ff;
+    --color-accent: #eeeaf6;
+    --color-accent-foreground: #3f2a66;
+    --color-muted: #e1dff0;
+    --color-muted-foreground: #7a6d94;
+    --color-border: #d5d2eb;
+    --color-ring: #b29cf2;
+}
