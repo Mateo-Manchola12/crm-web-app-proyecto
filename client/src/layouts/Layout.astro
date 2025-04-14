@@ -1,6 +1,9 @@
 ---
 import '@css/global.css'
 import '@fontsource/roboto'
+
+import Header from '@components/layout/Header.astro'
+import Footer from '@components/layout/Footer.astro'
 interface Props {
     title: string
 }
@@ -15,7 +18,13 @@ const { title } = Astro.props as Props
         <meta name="viewport" content="width=device-width" />
         <title>{title}</title>
     </head>
-    <body>
-        <slot />
+    <body
+        class="min-w-screen font-roboto bg-background text-on-background flex min-h-screen flex-col items-stretch"
+    >
+        <Header />
+        <main class="flex flex-1 flex-col items-stretch">
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>

@@ -1,13 +1,5 @@
 @import 'tailwindcss';
 
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 @theme {
     --color-primary: #7b61ff;
     --color-on-primary: #ffffff;
