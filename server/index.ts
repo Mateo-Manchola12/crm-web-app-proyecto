@@ -4,7 +4,7 @@ import { NODE_ENV, PORT, HOST } from '#constants/environment'
 import { buildPath } from '#constants/astro'
 import path from 'path'
 import { Seller } from '#types/sellers.js'
-import { $app } from '#utils/dbQueryHelpers.js'
+import { $app } from '#utils/dbQueryHelpers'
 
 const app = express()
 initAstro()

@@ -1,11 +1,13 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config'
 
-import tailwindcss from "@tailwindcss/vite";
-import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
-import htaccess from "astro-htaccess";
-import node from "@astrojs/node";
+import tailwindcss from '@tailwindcss/vite'
+import react from '@astrojs/react'
+import sitemap from '@astrojs/sitemap'
+import htaccess from 'astro-htaccess'
+import node from '@astrojs/node'
+
+import icon from 'astro-icon'
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,9 +23,9 @@ export default defineConfig({
         },
     },
 
-    integrations: [react(), sitemap(), htaccess()],
+    integrations: [react(), sitemap(), htaccess(), icon()],
 
     adapter: node({
-        mode: "middleware",
+        mode: 'middleware',
     }),
-});
+})
