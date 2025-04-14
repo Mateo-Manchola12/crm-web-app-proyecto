@@ -1,0 +1,27 @@
+---
+import Dashboard from './Dashboard.astro'
+---
+
+<section
+    class="mt-8 grid min-h-[70vh] grid-cols-1 p-4 py-0 md:gap-0 gap-20 md:mt-0 md:grid-cols-2 lg:gap-20"
+>
+    <article class="lg:ml-26 m-4 flex flex-col justify-center gap-6 md:m-8 md:w-2/3">
+        <h1 class="text-primary/90 text-shadow-md text-5xl font-bold sm:text-4xl lg:text-5xl">
+            Comienza a <span class="text-primary text-shadow-lg font-extrabold">fluir</span> en tus ventas
+        </h1>
+        <p class="text-2xl text-gray-600 md:text-xl lg:text-2xl">
+            Conoce la plataforma que te ayudará a gestionar tu negocio de manera eficiente y
+            sencilla.
+        </p>
+        <a
+            href="/signup"
+            class="from-primary to-primary/70 text-on-primary shadow-primary/60 hover:to-primary hover:from-primary/70 mt-4 rounded-xl bg-gradient-to-r px-4 py-2 text-center text-xl font-bold shadow-xl transition-colors md:w-2/3"
+            >Vamos ahora</a
+        >
+    </article>
+    <article
+        class="md:after:bg-secondary/30 md:after:left-15 relative grid items-center justify-center md:after:absolute md:after:top-0 md:after:h-full md:after:w-2/3"
+    >
+        <Dashboard />
+    </article>
+</section>
