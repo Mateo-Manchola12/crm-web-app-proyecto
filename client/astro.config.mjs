@@ -18,7 +18,7 @@ export default defineConfig({
         plugins: [tailwindcss()],
         server: {
             hmr: {
-                port: 5335,
+                port: 18083,
             },
         },
     },

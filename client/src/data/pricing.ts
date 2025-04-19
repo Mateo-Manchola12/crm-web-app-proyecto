@@ -53,7 +53,7 @@ export const tiers: Record<TierName, Tier> = {
     },
 }
 
-const features: Feature[] = [
+export const features: Feature[] = [
     {
         feature: 'Usuarios activos',
         tiers: { starter: '3', pro: '10', enterprise: 'Ilimitados' },
