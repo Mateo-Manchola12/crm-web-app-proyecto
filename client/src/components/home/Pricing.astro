@@ -4,18 +4,10 @@ import PricingCard from '@components/home/PricingCard.astro'
 ---
 
 <section class="max-w-screen px-2 md:px-10 xl:max-w-7xl">
-    <h2 class="mt-20 mb-5 w-full text-center text-3xl md:text-4xl font-bold">
+    <h2 class="mb-5 mt-20 w-full text-center text-3xl font-bold md:text-4xl">
         Es hora de que empieces a <strong>fluir</strong>
     </h2>
-    <div id="pricing" class="gap-15 flex w-full flex-row justify-around overflow-x-auto px-10 py-5">
+    <div id="pricing" class="gap-15 flex w-full flex-row justify-around overflow-x-auto px-10 py-5 -mb-11 pb-11 snap-x">
         {Object.entries(tiers).map(([key, tier]) => <PricingCard {...tier} />)}
     </div>
 </section>
-<style>
-    #pricing > :global(article) {
-        scroll-snap-align: center;
-    }
-    #pricing {
-        scroll-snap-type: x mandatory;
-    }
-</style>

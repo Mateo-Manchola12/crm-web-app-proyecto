@@ -7,7 +7,7 @@ const { name, price, description, features, recommended } = Astro.props
 ---
 
 <article
-    class="ring-primary shadow-primary md:min-w-2xs to-on-primary relative mt-10 flex min-w-[80vw] max-w-80 flex-col rounded-2xl bg-gradient-to-b to-10% p-8 ring-1 sm:min-w-[50vw]"
+    class="ring-primary shadow-primary md:min-w-2xs to-on-primary relative mt-10 flex min-w-[80vw] max-w-80 flex-col overflow-visible rounded-2xl bg-gradient-to-b to-10% p-8 ring-1 sm:min-w-[50vw] snap-center"
     class:list={recommended
         ? "before:from-primary before:h-15 before:text-on-primary from-purple-500/20 shadow-xl before:absolute before:-top-10 before:left-0 before:right-0 before:-z-10 before:inline-flex before:items-center before:justify-center before:rounded-t-2xl before:bg-gradient-to-b before:pb-5 before:text-base before:font-bold before:content-['DESTACADO']"
         : 'from-purple-500/20 shadow-md'}
