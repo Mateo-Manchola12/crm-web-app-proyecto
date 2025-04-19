@@ -83,3 +83,17 @@ export async function astroMiddleware(req: Request, res: Response, next: NextFun
 
     return next()
 }
+
+/**
+ * Inicializa Astro y maneja errores.
+ */
+export async function initAstro() {
+    getAstroHandler()
+        .then(() => {
+            console.info('Astro Inicializado correctamente')
+        })
+        .catch(() => {
+            console.error('Error al inicializar Astro')
+            process.exit(1)
+        })
+}

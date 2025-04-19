@@ -1,0 +1,15 @@
+---
+import { tiers } from '@data/pricing'
+import PricingCard from '@components/home/PricingCard.astro'
+---
+
+<section id="pricing" class="max-w-screen px-2 md:px-10 xl:max-w-7xl">
+    <h2 class="mb-5 mt-20 w-full text-center text-3xl font-bold md:text-4xl">
+        Es hora de que empieces a <strong>fluir</strong>
+    </h2>
+    <div
+        class="gap-15 -mb-11 flex w-full snap-x flex-row justify-around overflow-x-auto px-10 py-5 pb-11"
+    >
+        {Object.entries(tiers).map(([key, tier]) => <PricingCard {...tier} />)}
+    </div>
+</section>

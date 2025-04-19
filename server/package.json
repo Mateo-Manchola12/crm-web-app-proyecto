@@ -4,8 +4,8 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "start": "tsc && dotenvx run --env-file=./../.env.production -- node --conditions=production dist/index.js",
-        "dev": "dotenvx run --env-file=./../.env.development -- tsx --watch index.ts",
+        "start": "tsc && dotenvx run -f ./../.env.production -f ./../.env -- node --conditions=production dist/index.js",
+        "dev": "dotenvx run -f ./../.env.development -f ./../.env -- tsx --watch index.ts",
         "build": "tsc",
         "type-check": "tsc --noEmit"
     },
@@ -41,6 +41,7 @@
         "passport": "^0.7.0",
         "passport-local": "^1.0.0",
         "pg": "^8.14.1",
+        "postgres": "^3.4.5",
         "serve-favicon": "^2.5.0",
         "winston": "^3.17.0"
     },

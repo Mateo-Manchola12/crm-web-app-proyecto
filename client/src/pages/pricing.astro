@@ -1,0 +1,72 @@
+---
+import Layout from '@layout'
+import { tiers, features } from '@data/pricing'
+---
+
+<Layout title="Pricing">
+    <h1 class="text-primary/90 text-shadow-md mt-15 mb-6 px-6 text-4xl font-extrabold">
+        Maximiza tus ventas con <span class="text-primary text-shadow-lg">VioletFlow</span>
+    </h1>
+    <h2 class="px-6 text-2xl font-medium text-gray-600">
+        Elige el plan perfecto para hacer crecer tu negocio
+    </h2>
+    <section class="max-w-[90vw] overflow-x-auto px-4 py-8 md:px-10 xl:max-w-7xl">
+        <table
+            class="w-full rounded-t-2xl border border-gray-200 text-left text-sm shadow-lg md:text-base"
+        >
+            <thead class="rounded-t-2xl">
+                <tr
+                    class="bg-primary text-on-primary rounded-t-2xl capitalize shadow-md transition-shadow hover:shadow-lg"
+                >
+                    <th class="p-4 first:rounded-tl-2xl last:rounded-tr-2xl"></th>
+                    {
+                        Object.keys(tiers).map((tier) => (
+                            <th class="min-w-40 p-4 text-center text-xl font-bold first:rounded-tl-2xl last:rounded-tr-2xl">
+                                {tier}
+                            </th>
+                        ))
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    features.map(({ feature, tiers: list }, index) => (
+                        <tr
+                            class={
+                                index % 2 === 0
+                                    ? 'bg-white hover:bg-purple-50'
+                                    : 'bg-gray-100 hover:bg-purple-100'
+                            }
+                        >
+                            <td class="border-l-secondary/40 border-l-1 hover:text-primary p-4 text-center font-medium transition-colors">
+                                {feature}
+                            </td>
+                            {Object.entries(list).map(([tier, feature]) => (
+                                <td class="border-l-secondary/40 border-l-1 hover:text-primary p-4 text-center font-medium transition-colors">
+                                    {feature}
+                                </td>
+                            ))}
+                        </tr>
+                    ))
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="p-4 first:rounded-tl-2xl last:rounded-tr-2xl"></td>
+                    {
+                        Object.keys(tiers).map((tier) => (
+                            <td class="border-l-secondary/40 border-l-1 px-4 pb-6 pt-4 text-center">
+                                <a
+                                    class="from-primary to-primary/70 text-on-primary shadow-primary/60 hover:to-primary/90 hover:from-primary/80 focus:ring-primary/50 inline-block transform text-nowrap rounded-xl bg-gradient-to-r px-6 py-2 text-center text-base font-bold shadow-lg transition-all hover:scale-105 hover:shadow-xl focus:ring-4"
+                                    href={`/pricing/${tier}`}
+                                >
+                                    ¡Elige este plan!
+                                </a>
+                            </td>
+                        ))
+                    }
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+</Layout>

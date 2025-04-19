@@ -1,0 +1,115 @@
+<div class="grid max-w-md grid-flow-row auto-rows-min rounded-lg shadow-lg md:max-w-lg">
+    <div class="z-30 flex h-min flex-row gap-2 rounded-t-lg bg-gray-100 p-2">
+        <span class="inline-block h-2 w-2 rounded-full bg-red-500 md:h-3 md:w-3"></span>
+        <span class="inline-block h-2 w-2 rounded-full bg-yellow-500 md:h-3 md:w-3"></span>
+        <span class="inline-block h-2 w-2 rounded-full bg-green-500 md:h-3 md:w-3"></span>
+    </div>
+    <div class="grid min-h-80 grid-cols-3 rounded-b-lg bg-gray-50">
+        <div
+            class="from-primary to-secondary text-on-primary before:from-primary before:to-primary/60 relative z-20 rounded-bl-lg bg-gradient-to-b text-xs before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:-z-10 before:translate-x-1 before:transform before:bg-gradient-to-b before:blur-md lg:text-sm"
+        >
+            <ul>
+                <li
+                    class="shadow-primary text-shadow-sm text-shadow-secondary/30 gap-2 px-4 py-3 shadow-md lg:text-lg"
+                >
+                    Violet<strong>Flow</strong>
+                </li>
+                <li class="bg-secondary/40 gap-2 px-4 py-2">Dashboard</li>
+                <li class="gap-2 px-4 py-2">Clientes</li>
+                <li class="gap-2 px-4 py-2">Leads</li>
+            </ul>
+        </div>
+        <div
+            class="start h-fill bg-on-primary/60 z-20 col-start-2 col-end-4 grid grid-cols-2 gap-5 rounded-br-lg p-5 text-xs lg:text-base"
+        >
+            <div
+                class="from-secondary/40 to-secondary/60 inline-flex h-min w-full flex-col rounded-2xl bg-gradient-to-b p-2"
+            >
+                <span class="text-primary/70 text-shadow-sm font-bold">Clientes</span>
+                <span
+                    class="numbers text-shadow-md text-right text-base font-extrabold text-white before:align-super before:text-base before:content-['^'] md:text-lg lg:text-4xl"
+                    >125%</span
+                >
+            </div>
+            <div
+                class="from-primary to-secondary inline-flex h-min w-full flex-col rounded-2xl bg-gradient-to-br p-2"
+            >
+                <span class="text-on-primary/70 text-shadow-sm font-bold">Leads</span>
+                <span
+                    class="numbers text-on-primary text-shadow-md text-right text-base font-extrabold before:align-super before:text-base before:content-['^'] md:text-lg lg:text-4xl"
+                    >87%</span
+                >
+            </div>
+
+            <div class="bg-primary/10 col-span-2 col-start-1 col-end-3 rounded-2xl">
+                <div id="chart" class="w-fill"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    import { $, $$ } from '@/js/dom-selector'
+    import ApexCharts from 'apexcharts'
+
+    document.addEventListener('astro:page-load', () => {
+        const numbers = $$('.numbers')
+        const end = [125, 87]
+        let count = 0
+
+        const interval = setInterval(() => {
+            numbers.forEach((n, index) => {
+                n.innerText = Math.floor(count * (end[index] / 100)) + '%'
+            })
+            count++
+            if (count > 100) {
+                clearInterval(interval)
+            }
+        }, 10)
+
+        const options = {
+            series: [
+                {
+                    name: 'Clientes',
+                    data: [31, 40, 28, 51, 42, 109, 100],
+                },
+                {
+                    name: 'Leads',
+                    data: [11, 32, 45, 32, 34, 52, 41],
+                },
+            ],
+            chart: {
+                toolbar: {
+                    show: false,
+                },
+                height: 250,
+                type: 'area',
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            stroke: {
+                curve: 'smooth',
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: [
+                    '2018-09-19T00:00:00.000Z',
+                    '2018-09-19T01:30:00.000Z',
+                    '2018-09-19T02:30:00.000Z',
+                    '2018-09-19T03:30:00.000Z',
+                    '2018-09-19T04:30:00.000Z',
+                    '2018-09-19T05:30:00.000Z',
+                    '2018-09-19T06:30:00.000Z',
+                ],
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy HH:mm',
+                },
+            },
+        }
+
+        const chart = new ApexCharts($('#chart'), options)
+        chart.render()
+    })
+</script>

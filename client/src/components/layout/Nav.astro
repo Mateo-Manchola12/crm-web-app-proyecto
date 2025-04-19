@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<nav>
+    <button id="nav-button" class="pointer-events-auto cursor-pointer text-gray-600 md:hidden">
+        <Icon name="ic:round-menu" class:list="text-3xl" />
+        <Icon name="ic:round-close" class:list="text-3xl hidden" />
+    </button>
+    <ol
+        class="bg-on-primary shadow-secondary/20 fixed -right-full bottom-0 top-20 z-40 flex w-screen flex-col text-left text-xl text-gray-600 shadow-inner transition-all md:static md:w-auto md:flex-row md:bg-transparent md:text-base md:shadow-none"
+    >
+        <li>
+            <a
+                class="md:hover:bg-secondary/10 shadow-secondary/20 hover:shadow-secondary/40 inline-block w-full px-5 py-4 shadow-md hover:shadow-md md:px-4 md:shadow-none"
+                href="/">Inicio</a
+            >
+        </li>
+        <li>
+            <a
+                class="md:hover:bg-secondary/10 shadow-secondary/20 hover:shadow-secondary/40 inline-block w-full px-5 py-4 shadow-md hover:shadow-md md:px-4 md:shadow-none"
+                href="/pricing">Pricing</a
+            >
+        </li>
+        <li>
+            <a
+                class="md:hover:bg-secondary/10 shadow-secondary/20 hover:shadow-secondary/40 inline-block w-full px-5 py-4 shadow-md hover:shadow-md md:px-4 md:shadow-none"
+                href="/download">Descargas</a
+            >
+        </li>
+        <li>
+            <a
+                class="md:hover:bg-secondary/10 shadow-secondary/20 hover:shadow-secondary/40 inline-block w-full px-5 py-4 shadow-md hover:shadow-md md:px-4 md:shadow-none"
+                href="/contact">Contáctanos</a
+            >
+        </li>
+        <li class="mt-5 px-5 md:m-0 md:flex md:items-center md:p-0">
+            <a
+                class="text-on-primary to-primary from-primary/70 shadow-secondary/40 hover:shadow-secondary/70 ring-primary/30 ring-offset-primary/60 m-auto inline-block w-full rounded-xl bg-gradient-to-br p-2 text-center shadow-xl ring-1 ring-offset-1 hover:shadow-xl md:ml-4"
+                href="/#pricing">Empieza Ahora</a
+            >
+        </li>
+    </ol>
+</nav>
+<script>
+    import { $ } from '@js/dom-selector'
+
+    document.addEventListener('astro:page-load', () => {
+        const menu = $('nav > ol')
+        const xmark = $('[data-icon="ic:round-close"]')
+        const hamburger = $('[data-icon="ic:round-menu"]')
+        const button = $('#nav-button')
+
+        function toggleMenu(isOpen: boolean) {
+            menu?.classList.toggle('right-0', isOpen)
+            menu?.setAttribute('aria-hidden', isOpen ? 'false' : 'true')
+            xmark?.classList.toggle('hidden', !isOpen)
+            hamburger?.classList.toggle('hidden', isOpen)
+        }
+
+        button?.addEventListener('click', () => {
+            const isOpen = menu?.classList.contains('right-0')
+            console.log('isOpen', isOpen)
+            toggleMenu(!isOpen)
+        })
+    })
+</script>

@@ -1,8 +1,14 @@
 ---
-import Layout from "@layout";
+import Hero from '@/components/home/Hero.astro'
+import Pricing from '@/components/home/Pricing.astro'
+import Benefits from '@/components/home/Benefits.astro'
+import Cta from '@/components/home/Cta.astro'
+import Layout from '@layout'
 ---
 
 <Layout title="Home">
-    <h1>Hola Mundo!</h1>
-    <h2>Esta es una ruta estática generada por Astro!</h2>
+    <Hero />
+    <Pricing />
+    <Benefits />
+    <Cta></Cta>
 </Layout>
