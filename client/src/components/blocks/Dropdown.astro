@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+    name: string
+    id?: string
+    placeholder: string
+    required?: boolean
+    label: string
+    ariaLabel?: string
+    options: Array<{ value: string; label: string }>
+}
+
+const { name, id, placeholder, required, label, ariaLabel, options } = Astro.props as Props
+---
+
+<div>
+    <label for={id ?? name} class="block text-sm font-medium text-gray-700">{label}</label>
+    <div class="relative">
+        <select
+            id={id ?? name}
+            name={name}
+            aria-required={required}
+            aria-label={ariaLabel}
+            class="focus:border-primary focus:ring-primary hover:border-primary hover:ring-primary/30 shadow-primary/30 mt-1 block w-full appearance-none rounded-md border-gray-300 bg-gray-50 px-3 py-2 shadow-lg transition-all duration-300 hover:bg-purple-50 hover:ring-1 focus:bg-purple-100 focus:outline-0 focus:ring-2 focus:ring-offset-2 active:outline-0 sm:text-sm"
+        >
+            <option value="">{placeholder}</option>
+            {options.map(({ value, label }) => <option value={value}>{label}</option>)}
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <Icon name="ic:round-keyboard-arrow-down" />
+        </div>
+    </div>
+</div>

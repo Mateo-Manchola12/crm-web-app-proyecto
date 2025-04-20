@@ -1,0 +1,58 @@
+---
+import Honeypot from '@components/blocks/Honeypot.astro'
+
+interface Props {
+    action: string
+    buttonText: string
+    labelBy?: string
+    class?: string
+}
+
+const { action, buttonText, labelBy, class: className } = Astro.props as Props
+---
+
+<form action={action} method="post" aria-labelledby={labelBy} class={className}>
+    <Honeypot />
+    <slot />
+    <div class="md:col-span-2">
+        <button
+            type="submit"
+            aria-label="Enviar formulario"
+            class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary w-full rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
+        >
+            {buttonText}
+        </button>
+        <label class="flex items-center justify-center">
+            <input
+                type="checkbox"
+                name="privacy-policy"
+                checked
+                required
+                aria-required="true"
+                aria-label="Aceptar política de privacidad"
+                class="text-primary focus:ring-primary h-2 w-2 rounded border-gray-300"
+            />
+            <!-- Política de privacidad -->
+            <span class="ml-2 text-center text-xs text-gray-700">
+                Acepto la <a href="/privacy-policy" class="text-primary underline"
+                    >política de privacidad</a
+                >.
+            </span>
+        </label>
+    </div>
+</form>
+<script>
+    import { $$ } from '@js/dom-selector'
+
+    document.addEventListener('astro:page-load', () => {
+        const groups = $$<HTMLDivElement>('.group')
+        groups.forEach((group) => {
+            const inputs = $$<HTMLInputElement>('input, select', group)
+            inputs.forEach((input) => {
+                input.addEventListener('blur', () => {
+                    if (!group.classList.contains('touched')) group.classList.add('touched')
+                })
+            })
+        })
+    })
+</script>
