@@ -1,0 +1,24 @@
+---
+import Form from '@components/ui/Form.astro'
+import Input from '@components/ui/Input.astro'
+---
+
+<Form action="/login" buttonText="Iniciar Sesión">
+    <Input
+        label="Correo Electrónico"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+"
+        title="El correo electrónico debe tener un formato válido"
+    />
+    <Input
+        label="Contraseña"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        required
+    />
+    <a href="/signup">¿No tienes una cuenta? Regístrate aquí</a>
+</Form>

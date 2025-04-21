@@ -7,9 +7,9 @@ interface Props {
 
 const props = Astro.props
 
-import Form from '@components/blocks/Form.astro'
-import Input from '@components/blocks/Input.astro'
-import Dropdown from '@components/blocks/Dropdown.astro'
+import Form from '@components/ui/Form.astro'
+import Input from '@components/ui/Input.astro'
+import Dropdown from '@components/ui/Dropdown.astro'
 ---
 
 <Form class="w-5/6 max-w-2xl space-y-4 md:grid md:grid-cols-2 md:gap-6" {...props}>
@@ -50,7 +50,7 @@ import Dropdown from '@components/blocks/Dropdown.astro'
         name="tel"
         type="tel"
         label="Teléfono"
-        autocomplete="mobile tel"
+        autocomplete="tel"
         required={true}
         pattern="^\\+?[0-9]{9,15}$"
         title="El teléfono debe tener un formato válido"

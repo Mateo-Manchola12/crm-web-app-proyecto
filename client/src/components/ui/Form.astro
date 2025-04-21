@@ -1,5 +1,5 @@
 ---
-import Honeypot from '@components/blocks/Honeypot.astro'
+import Honeypot from '@components/ui/Honeypot.astro'
 
 interface Props {
     action: string
@@ -18,7 +18,7 @@ const { action, buttonText, labelBy, class: className } = Astro.props as Props
         <button
             type="submit"
             aria-label="Enviar formulario"
-            class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary w-full rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
+            class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary w-full cursor-pointer rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
         >
             {buttonText}
         </button>
@@ -49,7 +49,7 @@ const { action, buttonText, labelBy, class: className } = Astro.props as Props
         groups.forEach((group) => {
             const inputs = $$<HTMLInputElement>('input, select', group)
             inputs.forEach((input) => {
-                input.addEventListener('blur', () => {
+                input.addEventListener('keyup', () => {
                     if (!group.classList.contains('touched')) group.classList.add('touched')
                 })
             })

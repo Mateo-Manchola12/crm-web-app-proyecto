@@ -34,7 +34,7 @@ const { name, price, description, features, recommended } = Astro.props
         }
     </ul>
     <a
-        href={`/pricing/${name.toLocaleLowerCase()}`}
+        href={`/register/${name.toLocaleLowerCase()}`}
         class="shadow-primary/40 mt-auto inline-block w-full rounded-2xl border-2 bg-gradient-to-br py-1 text-center text-xl shadow-md transition-all"
         class:list={recommended
             ? 'from-primary to-primary/70 text-on-primary border-primary'

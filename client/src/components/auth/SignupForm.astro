@@ -1,0 +1,70 @@
+---
+import Input from '@components/ui/Input.astro'
+import GetDataForm from '@components/ui/GetDataForm.astro'
+import Dialog from '@components/ui/Dialog.astro'
+---
+
+<GetDataForm action="/signup" buttonText="Crear Cuenta">
+    <Input
+        class="col-start-1"
+        slot="custom-fields"
+        label="Contraseña"
+        name="password"
+        type="password"
+        required
+        autocomplete="new-password"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
+        title="La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número"
+    />
+    <Input
+        class="col-start-2"
+        slot="custom-fields"
+        label="Confirmar Contraseña"
+        name="confirm-password"
+        type="password"
+        required
+        autocomplete="new-password"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
+        title="La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número"
+    />
+    <a href="/signup" class="col-span-2 text-center">¿Ya tienes una cuenta? Iniciar Sesión</a>
+</GetDataForm>
+<Dialog buttonText="Cerrar" id="form-error-message" title="¡Debe realizar el pago primero!">
+    Para poder registrarse, primero debe realizar el pago. Si ya ha realizado el pago, por favor
+    inicie sesión.
+</Dialog>
+<script>
+    import { $ } from '@/js/dom-selector'
+
+    document.addEventListener('astro:page-load', () => {
+        const form = $<HTMLFormElement>('form')
+        const password = $<HTMLInputElement>("input[name='password']")
+        const confirmPassword = $<HTMLInputElement>("input[name='confirm-password']")
+
+        confirmPassword?.addEventListener('keyup', () => confirmPasswordHandler())
+        password?.addEventListener('blur', () => confirmPasswordHandler())
+
+        function confirmPasswordHandler() {
+            if (password?.value !== confirmPassword?.value) {
+                confirmPassword?.setCustomValidity('Las contraseñas no coinciden')
+                confirmPassword?.reportValidity()
+            } else confirmPassword?.setCustomValidity('')
+        }
+
+        form?.addEventListener('submit', (e) => {
+            const url = new URL(window.location.href)
+            if (!url.searchParams.get('payment')) {
+                $<HTMLDialogElement>('#form-error-message')?.showModal()
+                e.preventDefault()
+            }
+            let hidden = $<HTMLInputElement>('input[name="payment"]', form)
+            if (!hidden) {
+                hidden = document.createElement('input')
+                hidden.type = 'hidden'
+                hidden.name = 'payment'
+                form.appendChild(hidden)
+            }
+            hidden.value = 'true'
+        })
+    })
+</script>
