@@ -32,8 +32,8 @@ const Tag = anchor ? 'a' : 'button'
     id={id}
     {...anchor ? { href, target, rel } : { type, onclick }}
     aria-label={ariaLabel}
-    class:list={className}
     autofocus={autofocus}
+    class:list={className}
     class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary shadow-secondary w-full cursor-pointer rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
 >
     <slot />

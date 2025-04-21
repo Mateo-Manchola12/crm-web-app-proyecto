@@ -11,7 +11,7 @@ interface Props {
 const { action, buttonText, labelBy, class: className } = Astro.props as Props
 ---
 
-<form action={action} method="post" aria-labelledby={labelBy} class={className}>
+<form action={action} method="POST" aria-labelledby={labelBy} class={className} enctype="application/x-www-form-urlencoded">
     <Honeypot />
     <slot />
     <div class="md:col-span-2">

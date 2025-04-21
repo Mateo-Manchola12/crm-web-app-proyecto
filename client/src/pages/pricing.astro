@@ -56,21 +56,15 @@ import Button from '@/components/ui/Button.astro'
                     <td class="p-4 first:rounded-tl-2xl last:rounded-tr-2xl"></td>
                     {
                         Object.keys(tiers).map((tier) => (
-                            <td class="border-l-secondary/40 border-l-1 px-4 pb-6 pt-4 text-center">
+                            <td class="border-l-secondary/40 border-l-1 px-4 pb-6 pt-4">
                                 <Button
                                     href={`/register/${tier}`}
                                     aria-label={`Elegir plan ${tier}`}
-                                    class="hover:scale-105 rounded-xl"
+                                    class="inline-block transform text-nowrap rounded-xl text-center transition-transform hover:scale-105 hover:shadow-xl focus:ring-4"
                                     anchor
                                 >
                                     ¡Elige este plan!
                                 </Button>
-                                <a
-                                    class="from-primary to-primary/70 text-on-primary shadow-primary/60 hover:to-primary/90 hover:from-primary/80 focus:ring-primary/50 inline-block transform text-nowrap rounded-xl bg-gradient-to-r px-6 py-2 text-center text-base font-bold shadow-lg transition-all hover:shadow-xl focus:ring-4"
-                                    href={`/register/${tier}`}
-                                >
-                                    ¡Elige este plan!
-                                </a>
                             </td>
                         ))
                     }

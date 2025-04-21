@@ -14,13 +14,22 @@ import Dropdown from '@components/ui/Dropdown.astro'
 
 <Form class="w-5/6 max-w-2xl space-y-4 md:grid md:grid-cols-2 md:gap-6" {...props}>
     <Input
-        name="name"
+        name="first_name"
         type="text"
         label="Nombre"
-        autocomplete="name"
+        autocomplete="given-name"
         required={true}
         pattern="^[a-zA-ZÀ-ÿ\\s]{1,40}$"
         title="El nombre solo puede contener letras y espacios"
+    />
+    <Input
+        name="last_name"
+        type="text"
+        label="Apellido"
+        autocomplete="family-name"
+        required={true}
+        pattern="^[a-zA-ZÀ-ÿ\\s]{1,40}$"
+        title="El apellido solo puede contener letras y espacios"
     />
 
     <Dropdown
@@ -47,7 +56,7 @@ import Dropdown from '@components/ui/Dropdown.astro'
     />
 
     <Input
-        name="tel"
+        name="phone"
         type="tel"
         label="Teléfono"
         autocomplete="tel"
