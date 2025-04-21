@@ -3,7 +3,6 @@ import path from 'path'
 import morgan from 'morgan'
 
 import { astroMiddleware, initAstro } from '#middlewares/astro'
-import { db_app, db_api } from '#db'
 
 import { NODE_ENV, PORT, HOST } from '#constants/environment'
 import { buildPath } from '#constants/astro'

@@ -2,8 +2,19 @@ import { Seller, SellerPublic } from '#types/sellers'
 import { createPasswordHash } from '#utils/password'
 import checkInput from '#utils/checkInput'
 import { getRandomId } from '#utils/getRandomId.js'
-import { $app } from '#libs/dbQueryHelpers.js'
+import { $app } from '#libs/db/dbQueryHelpers.js'
 
+/**
+ * Verifica los datos de entrada proporcionados para registrar un vendedor.
+ *
+ * @param data - Objeto que contiene los datos del vendedor a validar.
+ * @param data.first_name - Nombre del vendedor. Debe ser una cadena no vacía, con un máximo de 40 caracteres y solo letras y espacios.
+ * @param data.last_name - Apellido del vendedor. Debe ser una cadena no vacía, con un máximo de 40 caracteres y solo letras y espacios.
+ * @param data.phone - Teléfono del vendedor. Debe ser una cadena con un mínimo de 9 y un máximo de 16 caracteres, permitiendo un prefijo opcional "+" seguido de números.
+ * @param data.email - Correo electrónico del vendedor. Debe ser una cadena válida con un formato de correo electrónico.
+ * @param data.password - Contraseña del vendedor. Debe ser una cadena entre 8 y 22 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.
+ * @returns Un objeto que indica si la validación fue exitosa, el vendedor validado (si es válido) y el nombre del campo que falló (si no es válido).
+ */
 export function checkIinputs(data: {
     first_name: string
     last_name: string
@@ -47,8 +58,7 @@ export function checkIinputs(data: {
             required: true,
             type: 'string',
             minLength: 8,
-            maxLength: 22,
-            regexp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,22}$/,
+            regexp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
         }),
     }
 
@@ -71,21 +81,34 @@ export function checkIinputs(data: {
     return { result: true, seller }
 }
 
+/**
+ * Verifica si un correo electrónico existe en la base de datos de vendedores.
+ *
+ * @param email - La dirección de correo electrónico a verificar.
+ * @returns Una promesa que se resuelve en `true` si el correo existe, de lo contrario `false`.
+ */
 export async function checkEmail(email: string): Promise<boolean> {
-    const { data } = await $app<Seller>`SELECT * FROM sellers WHERE email = ${email} `
-    if (data) return true
-    return false
+    const { data } = await $app<Seller>`SELECT *
+                                        FROM sellers
+                                        WHERE email = ${email} `
+    return !!data
 }
 
-export function createSeller(data: SellerPublic, password: string): Seller {
-    const passwordHash = createPasswordHash(password)
-    const seller: Seller = {
+/**
+ * Crea un nuevo objeto de vendedor con los datos proporcionados y una contraseña encriptada.
+ *
+ * @param data - Un objeto que contiene la información pública del vendedor.
+ * @param password - La contraseña en texto plano que será encriptada y almacenada.
+ * @returns Un nuevo objeto `Seller` con un ID único, privilegio y estado predeterminados,
+ *          y la contraseña encriptada.
+ */
+export async function createSeller(data: SellerPublic, password: string): Promise<Seller> {
+    const passwordHash = await createPasswordHash(password)
+    return {
         ...data,
         id: getRandomId(8),
         privilege: 1,
         status: 0,
         password: passwordHash,
     }
-
-    return seller
 }

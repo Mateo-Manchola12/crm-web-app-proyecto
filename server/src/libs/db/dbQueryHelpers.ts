@@ -1,7 +1,7 @@
 // Este archivo define funciones genéricas y específicas para realizar consultas a las bases de datos 'db_app' y 'db_api'.
 // Proporciona un manejo seguro de consultas SQL, retornando resultados estructurados con indicadores de éxito o error.
 
-import { db_app, db_api } from '#db'
+import { db_app, db_api } from '#libs/db/db.js'
 import { Sql, Row, ParameterOrFragment, RowList } from 'postgres'
 
 // Tipo genérico para los resultados de las consultas a la base de datos.
@@ -23,7 +23,6 @@ async function safeOne<T extends Row>(
     strings: TemplateStringsArray,
     ...values: ParameterOrFragment<never>[]
 ): Promise<QueryResult<T>> {
-    console.log(strings, values)
     if (!sql) return { ok: false, data: null, error: '[DB] Sin conexión a la base de datos' }
     try {
         // Ejecuta la consulta y obtiene el primer resultado.

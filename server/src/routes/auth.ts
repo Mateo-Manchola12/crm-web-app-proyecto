@@ -1,6 +1,6 @@
 import { checkEmail, checkIinputs, createSeller } from '#controllers/registerSeller'
-import { $app } from '#libs/dbQueryHelpers.js'
-import { db_app } from '#db.js'
+import { $app } from '#libs/db/dbQueryHelpers.js'
+import { db_app } from '#libs/db/db.js'
 import express from 'express'
 const Router = express.Router()
 
@@ -14,27 +14,38 @@ Router.post('/signup', async (req, res) => {
     const { result, seller, input } = checkIinputs(user)
 
     if (!result || !seller) {
+        console.log(`Error en el campo ${input}`)
         res.status(400).json({ message: `Error en el campo ${input}` })
+
         return
     }
 
     if (await checkEmail(seller?.email)) {
+        console.log('Email ya registrado')
         res.status(400).json({ message: 'Email ya registrado' })
+
         return
     }
 
-    const register = createSeller(seller, user.password)
+    const register = await createSeller(seller, user.password)
 
     if (!register) {
+        console.log('Error al crear el vendedor')
         res.status(400).json({ message: 'Error al crear el vendedor' })
+
         return
     }
 
-    const data =
-        await $app`INSERT INTO sellers ${db_app(register)}`
+    const data = await $app`INSERT INTO sellers ${db_app?.(register) ?? ''}`
 
-    console.log(data)
+    if (!data.ok) {
+        console.log('Error al crear el vendedor')
+        res.status(400).json({ message: 'Error al crear el vendedor' })
 
+        return
+    }
+
+    console.log('Vendedor creado')
     res.status(200).json({ message: 'Vendedor creado', seller: register })
 })
 

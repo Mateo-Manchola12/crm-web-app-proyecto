@@ -22,6 +22,7 @@ type DBConfig = {
  *
  * @throws Registrará un mensaje de error en la consola si la conexión falla.
  */
+
 export function createDatabaseConnection(config: DBConfig): Sql | null {
     try {
         const sql = postgres({
@@ -31,10 +32,23 @@ export function createDatabaseConnection(config: DBConfig): Sql | null {
             username: config.username,
             password: config.password,
         })
-        console.log(`[DB] Conectado a la base de datos: ${config.database}`)
+        console.log(`[DB] Conectando a la base de datos: ${config.database}`)
+        tryDatabaseConnection(sql)
         return sql
     } catch (error) {
         console.error(`[DB] Error al conectar con ${config.database}:`, error)
         return null
     }
+}
+
+function tryDatabaseConnection(db: Sql): void {
+    db`select 1`
+        .then(() => {
+            console.log(`[DB] Conexión exitosa a la base de datos: ${db.options.database}`)
+        })
+        .catch(() => {
+            console.error(
+                `[DB] Error al verificar la conexión a la base de datos: ${db.options.database}`,
+            )
+        })
 }
