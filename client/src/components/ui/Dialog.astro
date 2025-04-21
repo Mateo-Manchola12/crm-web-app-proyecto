@@ -1,4 +1,6 @@
 ---
+import Button from './Button.astro'
+
 interface Props {
     title: string
     buttonText: string
@@ -19,12 +21,15 @@ const { title, buttonText, id } = Astro.props
         {title}
     </h3>
     <p id={`${id}-message`}><slot /></p>
-    <button
+
+    <Button
+        id=""
+        aria-label="Cerrar ventana"
         type="button"
-        class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary mt-4 w-full cursor-pointer rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
         onclick="this.closest('dialog').close()"
         autofocus
+        class="mt-4"
     >
         {buttonText}
-    </button>
+    </Button>
 </dialog>

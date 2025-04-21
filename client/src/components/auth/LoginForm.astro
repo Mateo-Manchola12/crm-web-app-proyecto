@@ -3,7 +3,7 @@ import Form from '@components/ui/Form.astro'
 import Input from '@components/ui/Input.astro'
 ---
 
-<Form action="/login" buttonText="Iniciar Sesión">
+<Form action="/login" buttonText="Iniciar Sesión" class="space-y-6">
     <Input
         label="Correo Electrónico"
         name="email"
@@ -20,5 +20,9 @@ import Input from '@components/ui/Input.astro'
         autocomplete="current-password"
         required
     />
-    <a href="/signup">¿No tienes una cuenta? Regístrate aquí</a>
+    <a href="/pricing" class="mb-2 inline-block text-center text-sm"
+        >¿No tienes una cuenta? <br /> Elige uno de nuestros productos y <u
+            class="hover:text-primary text-nowrap">Regístrate aquí</u
+        >
+    </a>
 </Form>

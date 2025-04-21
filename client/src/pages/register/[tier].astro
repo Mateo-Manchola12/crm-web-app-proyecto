@@ -15,7 +15,7 @@ export const getStaticPaths = (() => {
 const { tier } = Astro.params
 ---
 
-<Layout title={`${tier.charAt(0).toUpperCase() + tier.slice(1)}`}>
+<Layout title={`Terminar Compra | VioletFlow ${tier.charAt(0).toUpperCase() + tier.slice(1)}`}>
     <section class="flex h-full w-full flex-col items-center justify-center space-y-10 p-4">
         <Cart {...tiers[tier as keyof typeof tiers]} />
         <SignupForm />

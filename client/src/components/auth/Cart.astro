@@ -2,6 +2,7 @@
 import Billing from '@components/auth/Billing'
 import Dropdown from '@components/ui/Dropdown.astro'
 import Dialog from '@components/ui/Dialog.astro'
+import Button from '../ui/Button.astro'
 
 interface Props {
     name: string
@@ -39,14 +40,8 @@ const { name, price, description } = Astro.props
     </article>
     <article class="flex w-full flex-col space-y-6 md:max-w-[45%]">
         <Billing client:load price={price} billingOptions={billingOptions} />
-        <button
-            id="pay-button"
-            type="submit"
-            aria-label="Pagar ahora"
-            class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary w-full cursor-pointer rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
-        >
-            Pagar ahora
-        </button>
+
+        <Button id="pay-button" type="submit" aria-label="Pagar ahora"> Pagar ahora </Button>
     </article>
 </section>
 <Dialog id="success-dialog" buttonText="Cerrar" title="¡Compra exitosa!"

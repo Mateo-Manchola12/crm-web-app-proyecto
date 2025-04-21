@@ -1,12 +1,15 @@
 ---
 import Layout from '@layout'
 import LoginForm from '@components/auth/LoginForm.astro'
-import SignupForm from '@components/auth/SignupForm.astro'
 ---
 
-<Layout title="¡Inicia Sesión!">
-    <h1>¡Bienvenido!</h1>
-    <p>Inicia sesión para acceder a tu cuenta.</p>
-    <LoginForm />
-    <SignupForm />
+<Layout title="¡Iniciar Sesión!">
+    <section
+        class="m-auto w-full max-w-[90vw] space-y-10 rounded-lg border border-gray-200 bg-white p-6 shadow-md md:max-w-xl md:space-y-4 text-center text-lg"
+        aria-labelledby="cart-title"
+    >
+        <h1 class="text-primary mt-10 text-4xl font-bold text-shadow-md text-shadow-primary/40" id="cart-title">¡Bienvenido!</h1>
+        <p>Inicia sesión para acceder a tu cuenta.</p>
+        <LoginForm />
+    </section>
 </Layout>
