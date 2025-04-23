@@ -77,7 +77,7 @@ export default function Billing({
                 <strong className="mr-auto"> SubTotal:</strong>
                 {price * billing != total && (
                     <span className="align-middle text-sm font-light text-gray-500">
-                        <s>${price * billing}/mes</s>
+                        <s>${price * billing}</s>
                     </span>
                 )}
                 ${total.toFixed(2)}

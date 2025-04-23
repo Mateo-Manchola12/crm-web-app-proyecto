@@ -5,7 +5,6 @@ import flash from '#utils/flash.js'
 import auth from '#middlewares/auth.js'
 
 const Router = express.Router()
-Router.get('/download', auth,(req, res, next) => {next()})
 
 Router.post('/login', async (req, res) => {
     const { email, password } = req.body
@@ -37,8 +36,7 @@ Router.post('/login', async (req, res) => {
     res.cookie('auth', token, {
         httpOnly: true,
         maxAge: 3600000,
-    })
-        .sendStatus(200)
+    }).sendStatus(200)
 })
 
 Router.post('/signup', async (req, res) => {

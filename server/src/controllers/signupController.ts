@@ -20,7 +20,7 @@ export function checkIinputs(data: {
     last_name: string
     phone: string
     email: string
-    password: string
+    password?: string
     [key: string]: unknown
 }): { result: boolean; seller: SellerPublic | null; input?: string } {
     const { first_name, last_name, phone, email, password } = data
@@ -54,15 +54,19 @@ export function checkIinputs(data: {
             maxLength: 50,
             regexp: /[^@\s]+@[^@\s]+\.[^@\s]+/,
         }),
-        password: checkInput(password, {
+    }
+
+    let checkpassword = true
+    if (password) {
+        checkpassword = checkInput(password, {
             required: true,
             type: 'string',
             minLength: 8,
             regexp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-        }),
+        })
     }
 
-    const result = Object.values(results).every((res) => res)
+    const result = Object.values(results).every((res) => res) && checkpassword
 
     if (!result) {
         return {

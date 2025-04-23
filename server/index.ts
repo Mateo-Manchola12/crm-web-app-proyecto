@@ -13,6 +13,7 @@ import dashboard from '#routes/dashboard'
 
 import session from '#middlewares/session'
 import authMiddleware from '#middlewares/auth'
+import client from '#routes/client.js'
 
 const app = express()
 
@@ -29,6 +30,7 @@ if (ENVIRONMENT === 'production') {
 }
 
 app.use(auth)
+app.use(client)
 app.use('/dashboard{/*path}', authMiddleware, dashboard)
 app.use(astroMiddleware)
 app.use((req, res) => {
