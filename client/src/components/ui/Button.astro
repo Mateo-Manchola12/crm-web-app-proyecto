@@ -22,8 +22,6 @@ type Props = (AnchorProps | ButtonProps) & {
 const { class: className, 'aria-label': ariaLabel, id, autofocus, anchor } = Astro.props as Props
 const { href, target, rel } = Astro.props as AnchorProps
 const { type, onclick } = Astro.props as ButtonProps
-const isAnchor = anchor ?? false
-const isButton = !anchor
 
 const Tag = anchor ? 'a' : 'button'
 ---

@@ -1,52 +1,77 @@
-import { checkEmail, checkIinputs, createSeller } from '#controllers/registerSeller'
-import { $app } from '#libs/db/dbQueryHelpers.js'
-import { db_app } from '#libs/db/db.js'
 import express from 'express'
+import { generateToken } from '#libs/auth/auth.js'
+import { localLogin, localSignup } from '#libs/auth/strategys.js'
+import flash from '#utils/flash.js'
+import auth from '#middlewares/auth.js'
+
 const Router = express.Router()
+Router.get('/download', auth,(req, res, next) => {next()})
 
-Router.post('/login', (req, res) => {
-    console.log('Login')
-    res.status(200).json({ message: 'Login' })
+Router.post('/login', async (req, res) => {
+    const { email, password } = req.body
+    if (!email || !password) {
+        flash(req, res, {
+            message: 'Email y contraseña son requeridos',
+            type: 'error',
+            duration: 5000,
+        })
+        res.sendStatus(400)
+        return
+    }
+
+    const { user, message } = await localLogin(email, password)
+    if (!user) {
+        flash(req, res, {
+            message,
+            type: 'error',
+            duration: 5000,
+        })
+        res.sendStatus(401)
+        return
+    }
+    const token = generateToken(user)
+
+    flash(req, res, { message: `¡Bienvenid@ ${user.first_name}!`, type: 'success', duration: 5000 })
+
+    res.clearCookie('auth')
+    res.cookie('auth', token, {
+        httpOnly: true,
+        maxAge: 3600000,
+    })
+        .sendStatus(200)
 })
+
 Router.post('/signup', async (req, res) => {
-    const user = req.body
+    const data = req.body
+    const { user, message } = await localSignup(data)
 
-    const { result, seller, input } = checkIinputs(user)
-
-    if (!result || !seller) {
-        console.log(`Error en el campo ${input}`)
-        res.status(400).json({ message: `Error en el campo ${input}` })
-
+    if (!user) {
+        flash(req, res, {
+            message,
+            type: 'error',
+            duration: 5000,
+        })
+        res.status(401)
         return
     }
 
-    if (await checkEmail(seller?.email)) {
-        console.log('Email ya registrado')
-        res.status(400).json({ message: 'Email ya registrado' })
+    flash(req, res, {
+        message,
+        type: 'success',
+        duration: 5000,
+    })
+    res.status(200)
+})
 
-        return
-    }
-
-    const register = await createSeller(seller, user.password)
-
-    if (!register) {
-        console.log('Error al crear el vendedor')
-        res.status(400).json({ message: 'Error al crear el vendedor' })
-
-        return
-    }
-
-    const data = await $app`INSERT INTO sellers ${db_app?.(register) ?? ''}`
-
-    if (!data.ok) {
-        console.log('Error al crear el vendedor')
-        res.status(400).json({ message: 'Error al crear el vendedor' })
-
-        return
-    }
-
-    console.log('Vendedor creado')
-    res.status(200).json({ message: 'Vendedor creado', seller: register })
+Router.post('/logout', auth, (req, res) => {
+    res.clearCookie('auth')
+    req.user = undefined
+    flash(req, res, {
+        message: 'Sesión cerrada',
+        type: 'success',
+        duration: 5000,
+    })
+    res.status(200).redirect('/')
 })
 
 export default Router

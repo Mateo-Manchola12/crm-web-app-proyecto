@@ -6,10 +6,9 @@ import Cart from '@/components/auth/Cart.astro'
 import SignupForm from '@/components/auth/SignupForm.astro'
 
 export const getStaticPaths = (() => {
-    const paths = Object.keys(tiers).map((tier) => ({
+    return Object.keys(tiers).map((tier) => ({
         params: { tier },
     }))
-    return paths
 }) satisfies GetStaticPaths
 
 const { tier } = Astro.params

@@ -4,7 +4,7 @@ import Dropdown from './ui/Dropdown.astro'
 import GetDataForm from './ui/GetDataForm.astro'
 ---
 
-<GetDataForm action="/contact" buttonText="Enviar" labelBy="contact-form-title">
+<GetDataForm data-redirect="/contact" action="/contact" buttonText="Enviar" labelBy="contact-form-title">
     <Dropdown
         slot="custom-fields"
         label="Plan de interés"

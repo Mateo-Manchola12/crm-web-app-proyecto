@@ -32,11 +32,11 @@ export function createDatabaseConnection(config: DBConfig): Sql | null {
             username: config.username,
             password: config.password,
         })
-        console.log(`[DB] Conectando a la base de datos: ${config.database}`)
+        console.info(`[DB] Conectando a la base de datos: ${config.database}`)
         tryDatabaseConnection(sql)
         return sql
     } catch (error) {
-        console.error(`[DB] Error al conectar con ${config.database}:`, error)
+        console.info(`[DB] Error al conectar con ${config.database}:`, error)
         return null
     }
 }
@@ -44,7 +44,7 @@ export function createDatabaseConnection(config: DBConfig): Sql | null {
 function tryDatabaseConnection(db: Sql): void {
     db`select 1`
         .then(() => {
-            console.log(`[DB] Conexión exitosa a la base de datos: ${db.options.database}`)
+            console.info(`[DB] Conexión exitosa a la base de datos: ${db.options.database}`)
         })
         .catch(() => {
             console.error(

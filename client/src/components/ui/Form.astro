@@ -1,17 +1,23 @@
 ---
 import Honeypot from '@components/ui/Honeypot.astro'
-
 interface Props {
     action: string
     buttonText: string
     labelBy?: string
     class?: string
+    'data-redirect': string
 }
 
-const { action, buttonText, labelBy, class: className } = Astro.props as Props
+const {
+    action,
+    buttonText,
+    labelBy,
+    class: className,
+    'data-redirect': href,
+} = Astro.props as Props
 ---
 
-<form action={action} method="POST" aria-labelledby={labelBy} class={className} enctype="application/x-www-form-urlencoded">
+<form {action} data-redirect={href} aria-labelledby={labelBy} class={className}>
     <Honeypot />
     <slot />
     <div class="md:col-span-2">
@@ -42,10 +48,14 @@ const { action, buttonText, labelBy, class: className } = Astro.props as Props
     </div>
 </form>
 <script>
-    import { $$ } from '@js/dom-selector'
+    import { $, $$ } from '@js/dom-selector'
+    import { toast } from 'react-toastify'
+    import { navigate } from 'astro:transitions/client'
 
     document.addEventListener('astro:page-load', () => {
+        const form = $<HTMLFormElement>('form')
         const groups = $$<HTMLDivElement>('.group')
+
         groups.forEach((group) => {
             const inputs = $$<HTMLInputElement>('input, select', group)
             inputs.forEach((input) => {
@@ -53,6 +63,36 @@ const { action, buttonText, labelBy, class: className } = Astro.props as Props
                     if (!group.classList.contains('touched')) group.classList.add('touched')
                 })
             })
+        })
+
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const formData = new FormData(form)
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                })
+
+                if (res.status === 200) {
+                    form.reset()
+                    groups.forEach((group) => {
+                        group.classList.remove('touched')
+                    })
+                    window.dispatchEvent(new Event('flash-message'))
+                    await navigate(form.dataset.redirect as string)
+                    return
+                }
+                window.dispatchEvent(new Event('flash-message'))
+            } catch (error) {
+                toast.error('Error al enviar el formulario', {
+                    pauseOnHover: false,
+                })
+            }
         })
     })
 </script>

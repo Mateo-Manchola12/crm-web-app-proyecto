@@ -3,7 +3,7 @@ import Form from '@components/ui/Form.astro'
 import Input from '@components/ui/Input.astro'
 ---
 
-<Form action="/login" buttonText="Iniciar Sesión" class="space-y-6">
+<Form action="/login" buttonText="Iniciar Sesión" class="space-y-6" data-redirect="/dashboard">
     <Input
         label="Correo Electrónico"
         name="email"

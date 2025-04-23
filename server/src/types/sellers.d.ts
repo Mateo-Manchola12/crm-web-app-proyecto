@@ -7,7 +7,7 @@ export type SellerPublic = {
 
 export type SellerPrivate = {
     id: string
-    password?: string
+    password: string
     corporate_email?: string
     status?: number
     privilege: number
