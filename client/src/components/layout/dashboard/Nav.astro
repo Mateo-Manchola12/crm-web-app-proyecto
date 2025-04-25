@@ -1,0 +1,23 @@
+---
+import { Icon } from 'astro-icon/components'
+import NavButton from './NavButton'
+---
+
+<nav
+    class="bg-primary inline-flex flex-col items-center justify-center md:h-full md:bg-transparent"
+>
+    <button id="nav-button" class="pointer-events-auto cursor-pointer p-4 md:hidden">
+        <Icon name="ic:round-menu" class:list="text-3xl" />
+        <Icon name="ic:round-close" class:list="text-3xl hidden" />
+    </button>
+    <ol
+        class="from-primary to-primary/70 shadow-secondary/30 fixed -right-full bottom-0 top-20 z-40 w-screen bg-white bg-gradient-to-b text-lg font-semibold shadow-inner transition-all md:static md:h-full md:w-full md:bg-transparent"
+    >
+        <NavButton target="dashboard"> Inicio </NavButton>
+        <NavButton target="contact"> Contactos </NavButton>
+        <NavButton target="client"> Clientes </NavButton>
+        <NavButton target="leads"> Prospectos </NavButton>
+        <NavButton target="company_leads"> Juridicos </NavButton>
+        <NavButton target="task"> Tareas </NavButton>
+    </ol>
+</nav>

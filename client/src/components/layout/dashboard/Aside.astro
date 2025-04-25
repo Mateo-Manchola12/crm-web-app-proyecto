@@ -1,0 +1,21 @@
+---
+import Nav from '@components/layout/dashboard/Nav.astro'
+---
+
+<aside class="text-on-primary flex md:flex-col">
+    <header class="bg-primary h-[calc(var(--spacing) * 22)] z-50 w-full">
+        <a href="/dashboard"
+            ><h1 class="border-b-secondary mx-6 mt-6 pb-4 text-4xl">
+                Violet<strong class="text-shadow-lg">Flow</strong>
+            </h1></a
+        >
+    </header>
+    <Nav />
+</aside>
+<script>
+    import { toggleMenu } from '@/js/menu-toggle'
+
+    document.addEventListener('astro:page-load', () => {
+        toggleMenu()
+    })
+</script>

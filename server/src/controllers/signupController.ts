@@ -92,9 +92,7 @@ export function checkIinputs(data: {
  * @returns Una promesa que se resuelve en `true` si el correo existe, de lo contrario `false`.
  */
 export async function checkEmail(email: string): Promise<boolean> {
-    const { data } = await $app<Seller>`SELECT *
-                                        FROM sellers
-                                        WHERE email = ${email} `
+    const { data } = await $app<Seller>`SELECT * FROM sellers WHERE email = ${email}`
     return !!data
 }
 

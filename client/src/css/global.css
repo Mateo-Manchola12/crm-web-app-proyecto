@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+.Toastify{
+    position: absolute;
+}
+
 @theme {
     --color-primary: #7b61ff;
     --color-on-primary: #ffffff;

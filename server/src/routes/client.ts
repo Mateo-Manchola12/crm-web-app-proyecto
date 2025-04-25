@@ -28,13 +28,13 @@ Router.post('/contact', (req, res) => {
         NODEMAILER_USER as string,
         'Nuevo mensaje de contacto',
         Object.values(user).join('\n'),
-    )
+    ).then()
 
     sendEmail(
         user.email,
         'Gracias por contactarnos',
         'Hola! Hemos recibido tu mensaje, Pronto uno de nuestros agentes se pondra en contacto contigo\nVioletFlow',
-    )
+    ).then()
     flash(req, res, {
         message: 'Mensaje enviado correctamente',
         type: 'success',

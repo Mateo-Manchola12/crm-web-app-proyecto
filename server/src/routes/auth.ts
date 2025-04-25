@@ -3,6 +3,7 @@ import { generateToken } from '#libs/auth/auth.js'
 import { localLogin, localSignup } from '#libs/auth/strategys.js'
 import flash from '#utils/flash.js'
 import auth from '#middlewares/auth.js'
+import { sendEmail } from '#libs/mail/transport.js'
 
 const Router = express.Router()
 
@@ -49,9 +50,15 @@ Router.post('/signup', async (req, res) => {
             type: 'error',
             duration: 5000,
         })
-        res.status(401)
+        res.sendStatus(401)
         return
     }
+
+    sendEmail(
+        user.email,
+        'Bienvenido a VioletFlow',
+        'Hola! Gracias por elegir violet flow, ya puedes empezar a utilizar tus servicios',
+    ).then()
 
     flash(req, res, {
         message,
