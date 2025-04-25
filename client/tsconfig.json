@@ -22,7 +22,8 @@
             "@svg/*": ["src/svg/*"],
             "@js/*": ["src/js/*"],
             "@css/*": ["src/css/*"],
-            "@data/*": ["src/data/*"]
+            "@data/*": ["src/data/*"],
+            "@stores": ["src/stores.ts"]
         }
     }
 }
