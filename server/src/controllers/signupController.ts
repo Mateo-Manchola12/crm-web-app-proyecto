@@ -72,7 +72,7 @@ export function checkIinputs(data: {
         return {
             result: false,
             seller: null,
-            input: Object.entries(results).find(([key, value]) => !value)?.[0],
+            input: Object.entries(results).find(([, value]) => !value)?.[0],
         }
     }
     const seller: SellerPublic = {

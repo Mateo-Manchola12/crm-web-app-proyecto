@@ -42,7 +42,7 @@ import Button from '@/components/ui/Button.astro'
                             <td class="border-l-secondary/40 border-l-1 hover:text-primary p-4 text-center font-medium transition-colors">
                                 {feature}
                             </td>
-                            {Object.entries(list).map(([tier, feature]) => (
+                            {Object.entries(list).map(([, feature]) => (
                                 <td class="border-l-secondary/40 border-l-1 hover:text-primary p-4 text-center font-medium transition-colors">
                                     {feature}
                                 </td>
