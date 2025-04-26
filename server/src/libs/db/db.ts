@@ -1,5 +1,5 @@
 import { DB_APP_NAME, DB_SESSIONS_NAME } from '#constants/db'
-import { createDatabaseConnection } from '#libs/db/dbConnection.js'
+import { createDatabaseConnection } from '#libs/db/dbConnection'
 
 /**
  * Establece las conexiones con las base de datos utilizando el nombre de la base de datos

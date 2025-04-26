@@ -1,8 +1,8 @@
 import { Seller, SellerPublic } from '#types/sellers'
 import { createPasswordHash } from '#utils/password'
 import checkInput from '#utils/checkInput'
-import { getRandomId } from '#utils/getRandomId.js'
-import { $app } from '#libs/db/dbQueryHelpers.js'
+import { getRandomId } from '#utils/getRandomId'
+import { $app } from '#libs/db/dbQueryHelpers'
 
 /**
  * Verifica los datos de entrada proporcionados para registrar un vendedor.

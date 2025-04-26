@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { SECRET_JWT_TOKEN } from '#constants/secrets.js'
-import { Seller } from '#types/sellers.js'
+import { SECRET_JWT_TOKEN } from '#constants/secrets'
+import { Seller } from '#types/sellers'
 
 // Función para generar el JWT
 export const generateToken = (user: Seller) => {

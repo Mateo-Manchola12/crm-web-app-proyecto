@@ -1,6 +1,6 @@
-import { findUserById } from '#controllers/loginController.js'
-import { verifyToken } from '#libs/auth/auth.js'
-import flash from '#utils/flash.js'
+import { findUserById } from '#controllers/loginController'
+import { verifyToken } from '#libs/auth/auth'
+import flash from '#utils/flash'
 import { NextFunction, Request, Response } from 'express'
 import { JwtPayload } from 'jsonwebtoken'
 

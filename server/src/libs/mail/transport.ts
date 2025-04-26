@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { NODEMAILER_PASSWORD, NODEMAILER_USER } from '#constants/secrets.js'
+import { NODEMAILER_PASSWORD, NODEMAILER_USER } from '#constants/secrets'
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',

@@ -1,8 +1,8 @@
-import { findUser, matchPassword } from '#controllers/loginController.js'
+import { findUser, matchPassword } from '#controllers/loginController'
 import { checkEmail, checkIinputs, createSeller } from '#controllers/signupController'
 import { $app } from '#libs/db/dbQueryHelpers'
 import { db_app } from '#libs/db/db'
-import { Seller } from '#types/sellers.js'
+import { Seller } from '#types/sellers'
 
 export async function localLogin(email: string, password: string) {
     const user = await findUser(email)

@@ -1,7 +1,7 @@
 // Este archivo define funciones genéricas y específicas para realizar consultas a las bases de datos 'db_app' y 'db_api'.
 // Proporciona un manejo seguro de consultas SQL, retornando resultados estructurados con indicadores de éxito o error.
 
-import { db_app, db_api } from '#libs/db/db.js'
+import { db_app, db_api } from '#libs/db/db'
 import { Sql, Row, ParameterOrFragment, RowList } from 'postgres'
 
 // Tipo genérico para los resultados de las consultas a la base de datos.

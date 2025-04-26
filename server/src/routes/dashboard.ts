@@ -1,4 +1,4 @@
-import { Seller } from '#types/sellers.js'
+import { Seller } from '#types/sellers'
 import express from 'express'
 
 const Router = express.Router()

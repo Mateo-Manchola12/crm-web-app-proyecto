@@ -1,9 +1,9 @@
 import express from 'express'
-import { generateToken } from '#libs/auth/auth.js'
-import { localLogin, localSignup } from '#libs/auth/strategys.js'
-import flash from '#utils/flash.js'
-import auth from '#middlewares/auth.js'
-import { sendEmail } from '#libs/mail/transport.js'
+import { generateToken } from '#libs/auth/auth'
+import { localLogin, localSignup } from '#libs/auth/strategys'
+import flash from '#utils/flash'
+import auth from '#middlewares/auth'
+import { sendEmail } from '#libs/mail/transport'
 
 const Router = express.Router()
 

@@ -1,8 +1,8 @@
-import { NODEMAILER_USER } from '#constants/secrets.js'
-import { checkIinputs } from '#controllers/signupController.js'
-import { sendEmail } from '#libs/mail/transport.js'
-import auth from '#middlewares/auth.js'
-import flash from '#utils/flash.js'
+import { NODEMAILER_USER } from '#constants/secrets'
+import { checkIinputs } from '#controllers/signupController'
+import { sendEmail } from '#libs/mail/transport'
+import auth from '#middlewares/auth'
+import flash from '#utils/flash'
 import express from 'express'
 
 const Router = express.Router()

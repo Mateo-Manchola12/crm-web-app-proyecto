@@ -13,7 +13,7 @@ import dashboard from '#routes/dashboard'
 
 import session from '#middlewares/session'
 import authMiddleware from '#middlewares/auth'
-import client from '#routes/client.js'
+import client from '#routes/client'
 
 const app = express()
 

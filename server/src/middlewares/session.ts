@@ -1,4 +1,4 @@
-import { SECRET_SESSION_TOKEN } from '#constants/secrets.js'
+import { SECRET_SESSION_TOKEN } from '#constants/secrets'
 import session from 'express-session'
 
 export default session({

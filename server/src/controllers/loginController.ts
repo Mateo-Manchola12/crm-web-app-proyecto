@@ -1,5 +1,5 @@
-import { $app } from '#libs/db/dbQueryHelpers.js'
-import { Seller } from '#types/sellers.js'
+import { $app } from '#libs/db/dbQueryHelpers'
+import { Seller } from '#types/sellers'
 import bcrypt from 'bcryptjs'
 
 export async function findUser(email: string) {
