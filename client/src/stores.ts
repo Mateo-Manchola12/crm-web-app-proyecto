@@ -1,7 +1,7 @@
 import { map } from 'nanostores'
 
 export const windowStore = map<Record<string, boolean>>({
-    dashboard: false,
+    home: false,
     contact: false,
     client: false,
     leads: false,

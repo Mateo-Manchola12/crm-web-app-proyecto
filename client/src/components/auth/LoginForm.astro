@@ -3,7 +3,7 @@ import Form from '@components/ui/Form.astro'
 import Input from '@components/ui/Input.astro'
 ---
 
-<Form action="/login" buttonText="Iniciar Sesión" class="space-y-6" data-redirect="/dashboard">
+<Form action="/login" buttonText="Iniciar Sesión" class="space-y-6" data-redirect="/dashboard" data-origin="login">
     <Input
         label="Correo Electrónico"
         name="email"
@@ -21,8 +21,8 @@ import Input from '@components/ui/Input.astro'
         required
     />
     <a href="/pricing" class="mb-2 inline-block text-center text-sm"
-        >¿No tienes una cuenta? <br /> Elige uno de nuestros productos y <u
-            class="hover:text-primary text-nowrap">Regístrate aquí</u
-        >
+    >¿No tienes una cuenta? <br /> Elige uno de nuestros productos y <u
+        class="hover:text-primary text-nowrap">Regístrate aquí</u
+    >
     </a>
 </Form>

@@ -28,7 +28,7 @@ const { title } = Astro.props as Props
         <Toaster client:load transition:persist transition:name="toaster-element" />
         <Flash client:load transition:name="flash-element" />
         <Aside />
-        <main class="">
+        <main class="z-10 overflow-y-auto h-screen">
             <slot />
         </main>
     </body>

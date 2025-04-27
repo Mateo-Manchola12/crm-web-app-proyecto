@@ -6,6 +6,7 @@ interface Props {
     labelBy?: string
     class?: string
     'data-redirect': string
+    'data-origin': string
 }
 
 const {
@@ -14,10 +15,17 @@ const {
     labelBy,
     class: className,
     'data-redirect': href,
+    'data-origin': origin,
 } = Astro.props as Props
 ---
 
-<form {action} data-redirect={href} aria-labelledby={labelBy} class={className}>
+<form
+    {action}
+    data-redirect={href}
+    data-origin={origin}
+    aria-labelledby={labelBy}
+    class={className}
+>
     <Honeypot />
     <slot />
     <div class="md:col-span-2">
@@ -67,6 +75,13 @@ const {
 
         form?.addEventListener('submit', async (e) => {
             e.preventDefault()
+
+            const precheck = new CustomEvent(`${form.dataset.redirect}-before-submit`, {
+                cancelable: true,
+            })
+            form.dispatchEvent(precheck)
+
+            if (precheck.defaultPrevented) return
             const formData = new FormData(form)
 
             try {

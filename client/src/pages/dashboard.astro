@@ -1,17 +1,15 @@
 ---
+import Banner from '@/components/dashboard/Banner.svelte'
+import MainView from '@/components/dashboard/MainView'
 import Layout from '@/layouts/Dashboard.astro'
 
 export const prerender = false
 import { getContextData } from '@utils/getContextData'
 
 const { data } = await getContextData<{ first_name: string; last_name: string }>(Astro)
-
 ---
 
-<Layout title="Servidor">
-    <h1 class="text-primary mb-10 mt-10 text-center text-3xl font-bold">
-        {data?.first_name}
-        {data?.last_name}
-    </h1>
-    <h2 class="text-2xl">Bienvenid@ a tu panel personal</h2>
+<Layout title="Dashboard">
+    <Banner {data} />
+    <MainView client:load />
 </Layout>

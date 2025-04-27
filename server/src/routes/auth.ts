@@ -30,7 +30,6 @@ Router.post('/login', async (req, res) => {
         return
     }
     const token = generateToken(user)
-
     flash(req, res, { message: `¡Bienvenid@ ${user.first_name}!`, type: 'success', duration: 5000 })
 
     res.clearCookie('auth')
@@ -65,7 +64,7 @@ Router.post('/signup', async (req, res) => {
         type: 'success',
         duration: 5000,
     })
-    res.status(200)
+    res.sendStatus(200)
 })
 
 Router.post('/logout', auth, (req, res) => {

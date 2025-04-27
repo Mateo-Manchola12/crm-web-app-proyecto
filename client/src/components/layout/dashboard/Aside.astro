@@ -2,7 +2,9 @@
 import Nav from '@components/layout/dashboard/Nav.astro'
 ---
 
-<aside class="text-on-primary flex md:flex-col">
+<aside
+    class="text-on-primary sticky top-0 flex md:flex-col md:after:absolute md:after:top-0 md:after:-right-2 md:after:bottom-0 md:after:w-2"
+>
     <header class="bg-primary h-[calc(var(--spacing) * 22)] z-50 w-full">
         <a href="/dashboard"
             ><h1 class="border-b-secondary mx-6 mt-6 pb-4 text-4xl">
@@ -19,3 +21,16 @@ import Nav from '@components/layout/dashboard/Nav.astro'
         toggleMenu()
     })
 </script>
+<style>
+    aside::after {
+        background-image:
+            linear-gradient(
+                to bottom,
+                var(--color-primary) 0%,
+                color-mix(in oklab, var(--color-primary) 70%, transparent) 100%
+            ),
+            linear-gradient(to right, rgba(255, 255, 255, 0.2), white);
+
+        background-blend-mode: overlay;
+    }
+</style>

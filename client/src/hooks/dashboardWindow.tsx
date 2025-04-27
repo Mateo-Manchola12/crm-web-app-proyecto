@@ -2,16 +2,22 @@ import { windowStore } from '@/stores'
 import { useStore } from '@nanostores/react'
 import { useEffect } from 'react'
 
+export type Section = {
+    name: string
+    label: string
+    view: string
+}
+
 export default function useDashboardWindow() {
     const $sections = useStore(windowStore)
 
-    const sections = [
-        { name: 'dashboard', label: 'Inicio' },
-        { name: 'contact', label: 'Contactos' },
-        { name: 'client', label: 'Clientes' },
-        { name: 'leads', label: 'Prospectos' },
-        { name: 'company_leads', label: 'Juridicos' },
-        { name: 'task', label: 'Tareas' },
+    const sections: Section[] = [
+        { name: 'home', label: 'Inicio', view: 'home' },
+        { name: 'contact', label: 'Contactos', view: 'clients' },
+        { name: 'client', label: 'Clientes', view: 'clients' },
+        { name: 'leads', label: 'Prospectos', view: 'clients' },
+        { name: 'company_leads', label: 'Juridicos', view: 'clients' },
+        { name: 'task', label: 'Tareas', view: 'task' },
     ]
 
     const setWindow = (target: string) => {

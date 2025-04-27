@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { toast, type Id } from 'react-toastify'
 
 type Flash = {
     message: string
     type: 'success' | 'error' | 'info'
     duration: number
 }
+
+let previousFlash: Id | undefined
 
 export default function Flash() {
     useEffect(() => {
@@ -19,7 +21,7 @@ export default function Flash() {
 
             const flash = JSON.parse(decodeURIComponent(flashMessage)) as Flash
 
-            toast[flash.type](flash.message, {
+            previousFlash = toast[flash.type](flash.message, {
                 pauseOnHover: false,
             })
 
@@ -34,5 +36,5 @@ export default function Flash() {
         }
     }, [])
 
-    return null
+    return <></>
 }

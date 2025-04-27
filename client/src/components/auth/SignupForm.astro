@@ -4,7 +4,7 @@ import GetDataForm from '@components/ui/GetDataForm.astro'
 import Dialog from '@components/ui/Dialog.astro'
 ---
 
-<GetDataForm action="/signup" buttonText="Crear Cuenta" data-redirect="/login">
+<GetDataForm action="/signup" buttonText="Crear Cuenta" data-redirect="/login" data-origin='signup'>
     <Input
         class="col-start-1"
         slot="custom-fields"
@@ -53,7 +53,7 @@ import Dialog from '@components/ui/Dialog.astro'
             } else confirmPassword?.setCustomValidity('')
         }
 
-        form?.addEventListener('submit', (e) => {
+        form?.addEventListener('before-submit', (e) => {
             const url = new URL(window.location.href)
             if (!url.searchParams.get('payment')) {
                 $<HTMLDialogElement>('#form-error-message')?.showModal()
