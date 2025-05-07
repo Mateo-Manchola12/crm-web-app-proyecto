@@ -18,9 +18,6 @@ export default defineConfig({
     },
     vite: {
         plugins: [tailwindcss()],
-        server: {
-            hmr: false
-        },
     },
 
     integrations: [react(), sitemap(), htaccess(), icon(), svelte()],

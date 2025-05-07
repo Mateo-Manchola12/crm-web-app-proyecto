@@ -51,6 +51,7 @@ async function safeMany<T extends Row[]>(
         const result = await sql<T[]>(strings, ...values)
         return { ok: true, data: result, error: null }
     } catch (error) {
+        console.error('[DB] Error en la consulta:', error)
         return { ok: false, data: null, error }
     }
 }

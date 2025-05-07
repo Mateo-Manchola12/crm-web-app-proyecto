@@ -10,6 +10,7 @@ import { buildPath } from '#constants/astro'
 
 import auth from '#routes/auth'
 import dashboard from '#routes/dashboard'
+import api from '#routes/api'
 
 import session from '#middlewares/session'
 import authMiddleware from '#middlewares/auth'
@@ -31,7 +32,8 @@ if (ENVIRONMENT === 'production') {
 
 app.use(auth)
 app.use(client)
-app.use('/dashboard{/*path}', authMiddleware, dashboard)
+app.use('/dashboard', authMiddleware, dashboard)
+app.use('/api', authMiddleware, api)
 app.use(astroMiddleware)
 app.use((req, res) => {
     res.status(404)

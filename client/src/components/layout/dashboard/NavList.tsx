@@ -1,4 +1,4 @@
-import useDashboardWindow from '@/hooks/dashboardWindow'
+import useDashboardWindow from '@hooks/useDashboardWindow.ts'
 import NavButton from '@components/layout/dashboard/NavButton'
 
 export default function () {

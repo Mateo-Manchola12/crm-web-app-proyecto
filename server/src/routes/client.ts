@@ -1,4 +1,4 @@
-import { NODEMAILER_USER } from '#constants/secrets'
+import { NODEMAILER_USER_EMAIL } from '#constants/secrets'
 import { checkIinputs } from '#controllers/signupController'
 import { sendEmail } from '#libs/mail/transport'
 import auth from '#middlewares/auth'
@@ -25,7 +25,7 @@ Router.post('/contact', (req, res) => {
     }
 
     sendEmail(
-        NODEMAILER_USER as string,
+        NODEMAILER_USER_EMAIL as string,
         'Nuevo mensaje de contacto',
         Object.values(user).join('\n'),
     ).then()

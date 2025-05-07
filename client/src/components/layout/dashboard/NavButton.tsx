@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 export default function ({
     children,
     target,
@@ -9,10 +11,13 @@ export default function ({
     isActive: boolean
     setWindow: (target: string) => void
 }) {
+    const [isActiveClass, setIsActiveClass] = useState('bg-transparent')
     const handleClick = () => {
         setWindow(target)
     }
-    const isActiveClass = isActive ? 'bg-secondary/40' : 'bg-transparent'
+    useEffect(() => {
+        setIsActiveClass(isActive ? 'bg-secondary/40' : 'bg-transparent')
+    }, [isActive])
     return (
         <li>
             <button

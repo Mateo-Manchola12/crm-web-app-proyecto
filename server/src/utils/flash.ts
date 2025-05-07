@@ -14,5 +14,7 @@ export default function flash(req: Request, res: Response, flash: Flash) {
     res.cookie('data-flash', cookie, {
         maxAge: flash.duration,
         httpOnly: false,
+        path: '/',
+        sameSite: 'lax',
     })
 }

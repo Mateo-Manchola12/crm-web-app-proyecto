@@ -5,6 +5,7 @@ import { db_app } from '#libs/db/db'
 import { Seller } from '#types/sellers'
 
 export async function localLogin(email: string, password: string) {
+
     const user = await findUser(email)
     if (!user) return { user: null, message: 'Email incorrecto' }
     if (!(await matchPassword(user, password)))

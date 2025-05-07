@@ -17,7 +17,6 @@
             "@utils/*": ["src/utils/*"],
             "@styles/*": ["src/styles/*"],
             "@public/*": ["public/*"],
-            "@types/*": ["src/types/*"],
             "@constants/*": ["src/constants/*"],
             "@svg/*": ["src/svg/*"],
             "@js/*": ["src/js/*"],

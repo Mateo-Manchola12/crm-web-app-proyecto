@@ -6,6 +6,10 @@ import auth from '#middlewares/auth'
 import { sendEmail } from '#libs/mail/transport'
 
 const Router = express.Router()
+Router.post('/mail', (req, res) => {
+    sendEmail('mmanchola12temporal@gmail.com', 'Hola', 'welcome', {})
+    res.sendStatus(200)
+})
 
 Router.post('/login', async (req, res) => {
     const { email, password } = req.body
@@ -71,11 +75,11 @@ Router.post('/logout', auth, (req, res) => {
     res.clearCookie('auth')
     req.user = undefined
     flash(req, res, {
-        message: 'Sesión cerrada',
+        message: 'Hasta luego, nos vemos pronto',
         type: 'success',
         duration: 5000,
     })
-    res.status(200).redirect('/')
+    res.sendStatus(200)
 })
 
 export default Router

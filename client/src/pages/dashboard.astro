@@ -11,5 +11,5 @@ const { data } = await getContextData<{ first_name: string; last_name: string }>
 
 <Layout title="Dashboard">
     <Banner {data} />
-    <MainView client:load />
+    <MainView client:only="react" />
 </Layout>

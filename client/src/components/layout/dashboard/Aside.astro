@@ -3,7 +3,7 @@ import Nav from '@components/layout/dashboard/Nav.astro'
 ---
 
 <aside
-    class="text-on-primary sticky top-0 flex md:flex-col md:after:absolute md:after:top-0 md:after:-right-2 md:after:bottom-0 md:after:w-2"
+    class="text-on-primary sticky top-0 z-40 flex md:flex-col md:after:absolute md:after:top-0 md:after:-right-2 md:after:bottom-0 md:after:w-2"
 >
     <header class="bg-primary h-[calc(var(--spacing) * 22)] z-50 w-full">
         <a href="/dashboard"
@@ -14,13 +14,6 @@ import Nav from '@components/layout/dashboard/Nav.astro'
     </header>
     <Nav />
 </aside>
-<script>
-    import { toggleMenu } from '@/js/menu-toggle'
-
-    document.addEventListener('astro:page-load', () => {
-        toggleMenu()
-    })
-</script>
 <style>
     aside::after {
         background-image:
@@ -29,8 +22,15 @@ import Nav from '@components/layout/dashboard/Nav.astro'
                 var(--color-primary) 0%,
                 color-mix(in oklab, var(--color-primary) 70%, transparent) 100%
             ),
-            linear-gradient(to right, rgba(255, 255, 255, 0.2), white);
+            linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9));
 
         background-blend-mode: overlay;
     }
 </style>
+<script>
+    import { toggleMenu } from '@/js/menu-toggle'
+
+    document.addEventListener('astro:page-load', () => {
+        toggleMenu()
+    })
+</script>

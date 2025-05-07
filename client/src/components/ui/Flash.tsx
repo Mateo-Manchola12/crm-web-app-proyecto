@@ -1,40 +1,55 @@
 import { useEffect } from 'react'
-import { toast, type Id } from 'react-toastify'
-
-type Flash = {
-    message: string
-    type: 'success' | 'error' | 'info'
-    duration: number
-}
-
-let previousFlash: Id | undefined
+import { toast } from 'react-toastify'
+import type { Flash } from '@js/emitFlash'
 
 export default function Flash() {
     useEffect(() => {
-        function showFlash() {
-            const flashMessage = document.cookie
+        const checkCookie = () => {
+            const raw = document.cookie
                 .split('; ')
-                .find((row) => row.startsWith('data-flash='))
+                .find((c) => c.startsWith('data-flash='))
                 ?.split('=')[1]
 
-            if (!flashMessage) return
+            if (raw) {
+                try {
+                    const decoded = decodeURIComponent(raw)
+                    const flash: Flash = JSON.parse(decoded)
+                    showFlash(flash)
+                } catch (err) {
+                    console.error('Error parsing flash from cookie', err)
+                }
 
-            const flash = JSON.parse(decodeURIComponent(flashMessage)) as Flash
-
-            previousFlash = toast[flash.type](flash.message, {
-                pauseOnHover: false,
-            })
-
-            document.cookie = 'data-flash=; max-age=0; path=/'
+                document.cookie = 'data-flash=; Max-Age=0; Path=/'
+            }
         }
 
-        window.addEventListener('flash-message', showFlash)
-        showFlash()
+        // Mostrar mensaje desde cookie al cargar
+        checkCookie()
+
+        // Escuchar evento personalizado para revisar cookies de nuevo
+        const onCheckCookie = () => checkCookie()
+
+        // Escuchar evento para mostrar un flash directamente
+        const onFlashMessage = (e: Event) => {
+            const flash = (e as CustomEvent).detail as Flash
+            showFlash(flash)
+        }
+
+        window.addEventListener('flash-message', onFlashMessage)
+        window.addEventListener('flash-check-cookie', onCheckCookie)
 
         return () => {
-            window.removeEventListener('flash-message', showFlash)
+            window.removeEventListener('flash-message', onFlashMessage)
+            window.removeEventListener('flash-check-cookie', onCheckCookie)
         }
     }, [])
+
+    function showFlash(flash: Flash) {
+        toast[flash.type](flash.message, {
+            autoClose: flash.duration ?? 3000,
+            pauseOnHover: true,
+        })
+    }
 
     return <></>
 }

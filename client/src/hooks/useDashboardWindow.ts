@@ -13,11 +13,10 @@ export default function useDashboardWindow() {
 
     const sections: Section[] = [
         { name: 'home', label: 'Inicio', view: 'home' },
-        { name: 'contact', label: 'Contactos', view: 'clients' },
-        { name: 'client', label: 'Clientes', view: 'clients' },
-        { name: 'leads', label: 'Prospectos', view: 'clients' },
-        { name: 'company_leads', label: 'Juridicos', view: 'clients' },
-        { name: 'task', label: 'Tareas', view: 'task' },
+        { name: 'contacts', label: 'Contactos', view: 'contacts' },
+        { name: 'customers', label: 'Clientes', view: 'contacts' },
+        { name: 'leads', label: 'Prospectos', view: 'contacts' },
+        { name: 'company_leads', label: 'Juridicos', view: 'contacts' },
     ]
 
     const setWindow = (target: string) => {

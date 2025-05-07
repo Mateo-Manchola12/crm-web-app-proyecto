@@ -57,8 +57,8 @@ const {
 </form>
 <script>
     import { $, $$ } from '@js/dom-selector'
-    import { toast } from 'react-toastify'
     import { navigate } from 'astro:transitions/client'
+    import { emitFlash, emitFlashFromCookie } from '../../js/emitFlash'
 
     document.addEventListener('astro:page-load', () => {
         const form = $<HTMLFormElement>('form')
@@ -98,15 +98,13 @@ const {
                     groups.forEach((group) => {
                         group.classList.remove('touched')
                     })
-                    window.dispatchEvent(new Event('flash-message'))
+                    emitFlashFromCookie()
                     await navigate(form.dataset.redirect as string)
                     return
                 }
-                window.dispatchEvent(new Event('flash-message'))
+                emitFlashFromCookie()
             } catch (error) {
-                toast.error('Error al enviar el formulario', {
-                    pauseOnHover: false,
-                })
+                emitFlash({ message: 'Error al enviar el formulario', type: 'error' })
             }
         })
     })

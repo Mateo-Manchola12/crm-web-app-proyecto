@@ -1,11 +1,11 @@
-import { ResponsiveLine, type Serie } from '@nivo/line'
+import { ResponsiveLine, type LineSeries } from '@nivo/line'
 import { useEffect, useState } from 'react'
 
 const clients = [31, 40, 28, 51, 42, 109, 100]
 const leads = [11, 32, 45, 32, 34, 52, 41]
 
 export default () => {
-    const [getData, setData] = useState<Serie[]>([
+    const [getData, setData] = useState<LineSeries[]>([
         { id: 'Clientes', data: clients.map((value, index) => ({ x: index, y: 0 })) },
         { id: 'Leads', data: leads.map((value, index) => ({ x: index, y: 0 })) },
     ])
