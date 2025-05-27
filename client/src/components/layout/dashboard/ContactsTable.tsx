@@ -24,8 +24,10 @@ async function fetchData() {
         {} as Record<number, string>,
     )
 
-    setCities(cityMap || {})
-    setSources(sourceMap || {})
+    return {
+        cities: cityMap || {},
+        sources: sourceMap || {},
+    }
 }
 
 export default function ({ data }: { data: Contact[] }) {
@@ -33,7 +35,10 @@ export default function ({ data }: { data: Contact[] }) {
     const [sources, setSources] = useState<Record<number, string>>({})
 
     useEffect(() => {
-        fetchData().then()
+        fetchData().then(({ cities: c, sources: s }) => {
+            setCities(c)
+            setSources(s)
+        })
     }, [])
 
     return (

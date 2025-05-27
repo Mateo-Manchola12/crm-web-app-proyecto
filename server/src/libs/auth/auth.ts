@@ -7,7 +7,7 @@ export const generateToken = (user: Seller) => {
     return jwt.sign({ id: user.id }, SECRET_JWT_TOKEN as string, { expiresIn: '1h' })
 }
 
-export const verifyToken = (token: string): Promise<JwtPayload>=> {
+export const verifyToken = (token: string): Promise<JwtPayload> => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, SECRET_JWT_TOKEN as string, (err, decoded) => {
             if (err) {

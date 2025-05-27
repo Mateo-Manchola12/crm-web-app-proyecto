@@ -6,10 +6,6 @@ import auth from '#middlewares/auth'
 import { sendEmail } from '#libs/mail/transport'
 
 const Router = express.Router()
-Router.post('/mail', (req, res) => {
-    sendEmail('mmanchola12temporal@gmail.com', 'Hola', 'welcome', {})
-    res.sendStatus(200)
-})
 
 Router.post('/login', async (req, res) => {
     const { email, password } = req.body
@@ -57,11 +53,7 @@ Router.post('/signup', async (req, res) => {
         return
     }
 
-    sendEmail(
-        user.email,
-        'Bienvenido a VioletFlow',
-        'Hola! Gracias por elegir violet flow, ya puedes empezar a utilizar tus servicios',
-    ).then()
+    sendEmail(user.email, 'Es hora de que empieces a fluir', 'welcome', {}).then()
 
     flash(req, res, {
         message,

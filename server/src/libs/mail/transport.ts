@@ -48,8 +48,8 @@ const createTransporter = async () => {
             hbs({
                 viewEngine: {
                     extname: '.hbs',
-                    partialsDir: path.resolve('./src/emails'),
-                    defaultLayout: false,
+                    partialsDir: path.resolve('./src/public/emails'),
+                    defaultLayout: path.resolve('./src/public/emails/layout'),
                 },
                 viewPath: path.resolve('./src/public/emails'),
                 extName: '.hbs',

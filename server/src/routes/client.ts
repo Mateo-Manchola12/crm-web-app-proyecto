@@ -23,18 +23,21 @@ Router.post('/contact', (req, res) => {
         res.sendStatus(400)
         return
     }
+    console.log('user', user)
 
-    sendEmail(
-        NODEMAILER_USER_EMAIL as string,
-        'Nuevo mensaje de contacto',
-        Object.values(user).join('\n'),
-    ).then()
-
-    sendEmail(
-        user.email,
-        'Gracias por contactarnos',
-        'Hola! Hemos recibido tu mensaje, Pronto uno de nuestros agentes se pondra en contacto contigo\nVioletFlow',
-    ).then()
+    sendEmail(user.email, 'Recibimos tu mensaje!', 'message-received', {})
+    sendEmail(NODEMAILER_USER_EMAIL as string, 'Nuevo contacto', 'contact-received', {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        country: user.country,
+        email: user.email,
+        phone: user.phone,
+        organization: user.organization,
+        'company-size': user['company-size'],
+        'job-title': user['job-title'],
+        plan: user.plan,
+        'privacy-policy': user['privacy-policy'],
+    })
     flash(req, res, {
         message: 'Mensaje enviado correctamente',
         type: 'success',
