@@ -1,0 +1,31 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<li class="text-on-primary mt-10 mb-auto text-3xl">
+    <button type="button" class="inline-flex w-full cursor-pointer justify-center" id="logout">
+        <Icon name="ic:round-log-out" />
+    </button>
+</li>
+<script>
+    import { $ } from '@js/dom-selector'
+    import { emitFlash } from '@js/emitFlash'
+    import { navigate } from 'astro:transitions/client'
+
+    document.addEventListener('astro:page-load', () => {
+        $('#logout')?.addEventListener('click', async () => {
+            const res = await fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            if (res.ok) {
+                await navigate('/')
+            } else {
+                const error = await res.json()
+                emitFlash({ message: error.message, type: 'error' })
+            }
+        })
+    })
+</script>

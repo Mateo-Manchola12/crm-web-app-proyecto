@@ -9,6 +9,8 @@ import node from '@astrojs/node'
 
 import icon from 'astro-icon'
 
+import svelte from '@astrojs/svelte'
+
 // https://astro.build/config
 export default defineConfig({
     server: {
@@ -16,14 +18,9 @@ export default defineConfig({
     },
     vite: {
         plugins: [tailwindcss()],
-        server: {
-            hmr: {
-                port: 18083,
-            },
-        },
     },
 
-    integrations: [react(), sitemap(), htaccess(), icon()],
+    integrations: [react(), sitemap(), htaccess(), icon(), svelte()],
 
     adapter: node({
         mode: 'middleware',

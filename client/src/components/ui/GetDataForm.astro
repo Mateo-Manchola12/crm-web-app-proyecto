@@ -1,0 +1,102 @@
+---
+interface Props {
+    action: string
+    buttonText: string
+    labelBy?: string
+    "data-redirect": string
+    "data-origin": string
+}
+
+const props = Astro.props
+
+import Form from '@components/ui/Form.astro'
+import Input from '@components/ui/Input.astro'
+import Dropdown from '@components/ui/Dropdown.astro'
+---
+
+<Form class="w-5/6 max-w-2xl space-y-4 md:grid md:grid-cols-2 md:gap-6" {...props}>
+    <Input
+        name="first_name"
+        type="text"
+        label="Nombre"
+        autocomplete="given-name"
+        required={true}
+        pattern="^[a-zA-ZÀ-ÿ\\s]{1,40}$"
+        title="El nombre solo puede contener letras y espacios"
+    />
+    <Input
+        name="last_name"
+        type="text"
+        label="Apellido"
+        autocomplete="family-name"
+        required={true}
+        pattern="^[a-zA-ZÀ-ÿ\\s]{1,40}$"
+        title="El apellido solo puede contener letras y espacios"
+    />
+
+    <Dropdown
+        name="country"
+        label="País"
+        required={true}
+        options={[
+            { value: 'mx', label: 'México' },
+            { value: 'es', label: 'España' },
+            { value: 'ar', label: 'Argentina' },
+            { value: 'co', label: 'Colombia' },
+        ]}
+        placeholder="Selecciona tu país"
+    />
+
+    <Input
+        name="email"
+        type="text"
+        label="Correo Electrónico"
+        autocomplete="email"
+        required={true}
+        pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+"
+        title="El correo electrónico debe tener un formato válido"
+    />
+
+    <Input
+        name="phone"
+        type="tel"
+        label="Teléfono"
+        autocomplete="tel"
+        required={true}
+        pattern="^\\+?[0-9]{9,15}$"
+        title="El teléfono debe tener un formato válido"
+    />
+
+    <Input
+        name="organization"
+        type="text"
+        label="Nombre de la empresa"
+        autocomplete=" organization"
+        pattern="^[a-zA-ZÀ-ÿ\\s&-]{1,40}$"
+        title="El nombre de la empresa solo puede contener letras, espacios y guiones"
+    />
+
+    <Dropdown
+        name="company-size"
+        label="Tamaño de la empresa"
+        options={[
+            { value: 'small', label: 'Pequeña (1-10 empleados)' },
+            { value: 'medium', label: 'Mediana (11-50 empleados)' },
+            { value: 'large', label: 'Grande (50+ empleados)' },
+        ]}
+        placeholder="Selecciona el tamaño"
+    />
+
+    <Input
+        name="job-title"
+        type="text"
+        label="Puesto de trabajo"
+        autocomplete="organization-title"
+        required={true}
+        pattern="^[a-zA-ZÀ-ÿ\\s]{1,40}$"
+        title="El puesto solo puede contener letras y espacios"
+    />
+
+    <slot name="custom-fields" />
+    <slot />
+</Form>

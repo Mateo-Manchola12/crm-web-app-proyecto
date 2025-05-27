@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { tiers } from '@/data/pricing'
+import Layout from '@layout'
+import Cart from '@/components/auth/Cart.astro'
+import SignupForm from '@/components/auth/SignupForm.astro'
+
+export const getStaticPaths = (() => {
+    return Object.keys(tiers).map((tier) => ({
+        params: { tier },
+    }))
+}) satisfies GetStaticPaths
+
+const { tier } = Astro.params
+---
+
+<Layout title={`Terminar Compra | VioletFlow ${tier.charAt(0).toUpperCase() + tier.slice(1)}`}>
+    <section class="flex h-full w-full flex-col items-center justify-center space-y-10 p-4">
+        <Cart {...tiers[tier as keyof typeof tiers]} />
+        <SignupForm />
+    </section>
+</Layout>

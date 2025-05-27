@@ -1,0 +1,111 @@
+---
+import Honeypot from '@components/ui/Honeypot.astro'
+interface Props {
+    action: string
+    buttonText: string
+    labelBy?: string
+    class?: string
+    'data-redirect': string
+    'data-origin': string
+}
+
+const {
+    action,
+    buttonText,
+    labelBy,
+    class: className,
+    'data-redirect': href,
+    'data-origin': origin,
+} = Astro.props as Props
+---
+
+<form
+    {action}
+    data-redirect={href}
+    data-origin={origin}
+    aria-labelledby={labelBy}
+    class={className}
+>
+    <Honeypot />
+    <slot />
+    <div class="md:col-span-2">
+        <button
+            type="submit"
+            aria-label="Enviar formulario"
+            class="from-primary/80 to-primary hover:from-primary hover:to-primary/80 focus:ring-primary shadow-secondary w-full cursor-pointer rounded-md bg-gradient-to-r px-4 py-2 text-white shadow-lg transition-colors duration-300 focus:outline-none"
+        >
+            {buttonText}
+        </button>
+        <label class="flex items-center justify-center">
+            <input
+                type="checkbox"
+                name="privacy-policy"
+                checked
+                required
+                aria-required="true"
+                aria-label="Aceptar política de privacidad"
+                class="text-primary focus:ring-primary h-2 w-2 rounded border-gray-300"
+            />
+            <!-- Política de privacidad -->
+            <span class="ml-2 text-center text-xs text-gray-700">
+                Acepto la <a href="/privacy-policy" class="text-primary underline"
+                    >política de privacidad</a
+                >.
+            </span>
+        </label>
+    </div>
+</form>
+<script>
+    import { $, $$ } from '@js/dom-selector'
+    import { navigate } from 'astro:transitions/client'
+    import { emitFlash, emitFlashFromCookie } from '../../js/emitFlash'
+
+    document.addEventListener('astro:page-load', () => {
+        const form = $<HTMLFormElement>('form')
+        const groups = $$<HTMLDivElement>('.group')
+
+        groups.forEach((group) => {
+            const inputs = $$<HTMLInputElement>('input, select', group)
+            inputs.forEach((input) => {
+                input.addEventListener('keyup', () => {
+                    if (!group.classList.contains('touched')) group.classList.add('touched')
+                })
+            })
+        })
+
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            const precheck = new CustomEvent(`${form.dataset.redirect}-before-submit`, {
+                cancelable: true,
+            })
+            form.dispatchEvent(precheck)
+
+            if (precheck.defaultPrevented) return
+            const formData = new FormData(form)
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                })
+
+                if (res.status === 200) {
+                    form.reset()
+                    groups.forEach((group) => {
+                        group.classList.remove('touched')
+                    })
+                    emitFlashFromCookie()
+                    await navigate(form.dataset.redirect as string)
+                    return
+                }
+                emitFlashFromCookie()
+            } catch (error) {
+                emitFlash({ message: 'Error al enviar el formulario', type: 'error' })
+            }
+        })
+    })
+</script>

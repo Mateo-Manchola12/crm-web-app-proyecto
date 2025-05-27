@@ -1,11 +1,16 @@
-export type Seller = {
-    id: string
-    nombre: string
-    apellido: string
-    telefono: number
-    correo: string
-    contraseña: string
-    correo_corporativo: string
-    estado: number
-    privilegio: number
+export type SellerPublic = {
+    first_name: string
+    last_name: string
+    phone: number
+    email: string
 }
+
+export type SellerPrivate = {
+    id: string
+    password: string
+    corporate_email?: string
+    status?: number
+    privilege: number
+}
+
+export type Seller = SellerPublic & SellerPrivate

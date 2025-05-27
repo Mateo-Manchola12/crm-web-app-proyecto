@@ -17,12 +17,12 @@
             "@utils/*": ["src/utils/*"],
             "@styles/*": ["src/styles/*"],
             "@public/*": ["public/*"],
-            "@types/*": ["src/types/*"],
             "@constants/*": ["src/constants/*"],
             "@svg/*": ["src/svg/*"],
             "@js/*": ["src/js/*"],
             "@css/*": ["src/css/*"],
-            "@data/*": ["src/data/*"]
+            "@data/*": ["src/data/*"],
+            "@stores": ["src/stores.ts"]
         }
     }
 }

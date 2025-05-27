@@ -36,3 +36,4 @@ server/build/
 # Otros archivos innecesarios
 *.bak
 *.swp
+*.sql

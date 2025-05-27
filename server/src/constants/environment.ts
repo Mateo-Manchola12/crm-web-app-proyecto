@@ -1,3 +1,5 @@
-export const NODE_ENV = process.env.NODE_ENV as string
-export const PORT = Number(process.env.PORT) as number
-export const HOST = process.env.HOST as string
+const { NODE_ENV, PORT, HOST } = process.env;
+
+export const ENVIRONMENT = NODE_ENV as string;
+export const SERVER_PORT = Number(PORT);
+export const SERVER_HOST = HOST as string;

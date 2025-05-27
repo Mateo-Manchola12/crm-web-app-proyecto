@@ -1,0 +1,15 @@
+---
+import Banner from '@/components/dashboard/Banner.svelte'
+import MainView from '@/components/dashboard/MainView'
+import Layout from '@/layouts/Dashboard.astro'
+
+export const prerender = false
+import { getContextData } from '@utils/getContextData'
+
+const { data } = await getContextData<{ first_name: string; last_name: string }>(Astro)
+---
+
+<Layout title="Dashboard">
+    <Banner {data} />
+    <MainView client:only="react" />
+</Layout>

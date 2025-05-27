@@ -10,6 +10,6 @@ import PricingCard from '@components/home/PricingCard.astro'
     <div
         class="gap-15 -mb-11 flex w-full snap-x flex-row justify-around overflow-x-auto px-10 py-5 pb-11"
     >
-        {Object.entries(tiers).map(([key, tier]) => <PricingCard {...tier} />)}
+        {Object.entries(tiers).map(([, tier]) => <PricingCard {...tier} />)}
     </div>
 </section>

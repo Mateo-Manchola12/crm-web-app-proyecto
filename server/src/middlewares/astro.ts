@@ -2,7 +2,7 @@
 // Proporciona un manejador dinámico que se ajusta al entorno de ejecución (desarrollo o producción).
 
 import { dev, build } from 'astro'
-import { NODE_ENV } from '#constants/environment'
+import { ENVIRONMENT } from '#constants/environment'
 import { buildPath, clientPath } from '#constants/astro'
 import { NextFunction, Request, Response } from 'express'
 import path from 'path'
@@ -41,18 +41,18 @@ function isProdHandler(fn: AstroHandler): fn is AstroProductionHandler {
  * Crea un manejador de Astro basado en el entorno de ejecución.
  */
 async function createAstroHandler(): Promise<AstroHandler> {
-    if (NODE_ENV === 'development') {
+    if (ENVIRONMENT === 'development') {
         const server = await dev({ root: clientPath })
         return server.handle
     }
 
-    if (NODE_ENV === 'production') {
+    if (ENVIRONMENT === 'production') {
         await build({ root: clientPath })
         const entry = await import(path.resolve(buildPath, 'server', 'entry.mjs'))
         return entry.handler
     }
 
-    throw new Error('Unknown environment: ' + NODE_ENV)
+    throw new Error('Unknown environment: ' + ENVIRONMENT)
 }
 
 /**
@@ -71,12 +71,12 @@ export async function getAstroHandler(): Promise<AstroHandler> {
 export async function astroMiddleware(req: Request, res: Response, next: NextFunction) {
     const astroHandler = await getAstroHandler()
 
-    if (isDevHandler(astroHandler) && NODE_ENV === 'development') {
+    if (isDevHandler(astroHandler) && ENVIRONMENT === 'development') {
         req.headers.body = JSON.stringify(req.body || {})
         return astroHandler(req, res)
     }
 
-    if (isProdHandler(astroHandler) && NODE_ENV === 'production') {
+    if (isProdHandler(astroHandler) && ENVIRONMENT === 'production') {
         const locals: Locals = req.body || {}
         return astroHandler(req, res, next, locals)
     }

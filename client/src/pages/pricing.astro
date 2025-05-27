@@ -1,6 +1,7 @@
 ---
 import Layout from '@layout'
 import { tiers, features } from '@data/pricing'
+import Button from '@/components/ui/Button.astro'
 ---
 
 <Layout title="Pricing">
@@ -41,7 +42,7 @@ import { tiers, features } from '@data/pricing'
                             <td class="border-l-secondary/40 border-l-1 hover:text-primary p-4 text-center font-medium transition-colors">
                                 {feature}
                             </td>
-                            {Object.entries(list).map(([tier, feature]) => (
+                            {Object.entries(list).map(([, feature]) => (
                                 <td class="border-l-secondary/40 border-l-1 hover:text-primary p-4 text-center font-medium transition-colors">
                                     {feature}
                                 </td>
@@ -55,13 +56,15 @@ import { tiers, features } from '@data/pricing'
                     <td class="p-4 first:rounded-tl-2xl last:rounded-tr-2xl"></td>
                     {
                         Object.keys(tiers).map((tier) => (
-                            <td class="border-l-secondary/40 border-l-1 px-4 pb-6 pt-4 text-center">
-                                <a
-                                    class="from-primary to-primary/70 text-on-primary shadow-primary/60 hover:to-primary/90 hover:from-primary/80 focus:ring-primary/50 inline-block transform text-nowrap rounded-xl bg-gradient-to-r px-6 py-2 text-center text-base font-bold shadow-lg transition-all hover:scale-105 hover:shadow-xl focus:ring-4"
-                                    href={`/pricing/${tier}`}
+                            <td class="border-l-secondary/40 border-l-1 px-4 pb-6 pt-4">
+                                <Button
+                                    href={`/register/${tier}`}
+                                    aria-label={`Elegir plan ${tier}`}
+                                    class="inline-block transform text-nowrap rounded-xl text-center transition-transform hover:scale-105 hover:shadow-xl focus:ring-4"
+                                    anchor
                                 >
                                     ¡Elige este plan!
-                                </a>
+                                </Button>
                             </td>
                         ))
                     }
