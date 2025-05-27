@@ -11,7 +11,7 @@ Router.get('/download', auth, (req, res, next) => {
     next()
 })
 
-Router.post('/contact', (req, res) => {
+Router.post('/api/contact', (req, res) => {
     const user = req.body
     const { result, input } = checkIinputs(user)
     if (!result) {
@@ -23,7 +23,6 @@ Router.post('/contact', (req, res) => {
         res.sendStatus(400)
         return
     }
-    console.log('user', user)
 
     sendEmail(user.email, 'Recibimos tu mensaje!', 'message-received', {})
     sendEmail(NODEMAILER_USER_EMAIL as string, 'Nuevo contacto', 'contact-received', {

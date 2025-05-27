@@ -30,8 +30,8 @@ if (ENVIRONMENT === 'production') {
     app.use(express.static(path.join(buildPath, 'client')))
 }
 
-app.use(auth)
 app.use(client)
+app.use('/api', auth)
 app.use('/dashboard', authMiddleware, dashboard)
 app.use('/api', authMiddleware, api)
 app.use(astroMiddleware)
