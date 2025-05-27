@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import hbs from 'nodemailer-express-handlebars'
+import hbs, { HbsTransporter } from 'nodemailer-express-handlebars'
 import path from 'path'
 
 import {
@@ -30,7 +30,7 @@ const createTransporter = async () => {
             throw new Error('[EMAIL] No se pudo obtener el token de acceso.')
         }
 
-        const transporter = nodemailer.createTransport({
+        const transporter: HbsTransporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
             secure: false,
