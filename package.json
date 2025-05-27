@@ -1,11 +1,11 @@
 {
     "name": "crm-web-app-proyecto",
     "scripts": {
-        "dev": "cross-env NODE_ENV=development npm run dev --workspace server",
-        "dev:client": "cross-env NODE_ENV=development npm run dev --workspace client",
-        "dev:server": "cross-env NODE_ENV=development npm run dev --workspace server",
-        "build": "cross-env NODE_ENV=production npm run build --workspace client",
-        "start": "cross-env NODE_ENV=production npm run start --workspace server",
+        "dev": "cross-env NODE_ENV=development npm run dev --max-old-space-size=4096 --workspace server",
+        "dev:client": "cross-env NODE_ENV=development npm run dev --max-old-space-size=4096 --workspace client",
+        "dev:server": "cross-env NODE_ENV=development npm run dev --max-old-space-size=4096 --workspace server",
+        "build": "cross-env NODE_ENV=production npm run build --max-old-space-size=4096 --workspace client",
+        "start": "cross-env NODE_ENV=production npm run start --max-old-space-size=4096 --workspace server",
         "lint": "eslint .",
         "lint:fix": "eslint --fix ."
     },
