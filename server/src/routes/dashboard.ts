@@ -59,7 +59,7 @@ Router.get('/customers', async (req, res) => {
                        creation_date,
                        city,
                        source
-                FROM contact_lead`.then(({ data: row }) => {
+                FROM contact_customer`.then(({ data: row }) => {
         row?.forEach((row) => {
             data.push({ ...row, type: 'LEAD' })
         })
@@ -75,7 +75,7 @@ Router.get('/leads', async (req, res) => {
                        creation_date,
                        city,
                        source
-                FROM contact_customer`.then(({ data: row }) => {
+                FROM contact_lead`.then(({ data: row }) => {
         row?.forEach((row) => {
             data.push({ ...row, type: 'CUSTOMER' })
         })
