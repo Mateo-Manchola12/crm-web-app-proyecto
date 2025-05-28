@@ -74,4 +74,22 @@ Router.post('/logout', auth, (req, res) => {
     res.sendStatus(200)
 })
 
+Router.post('/app/login', async (req, res) => {
+    const { email, password } = req.body
+    if (!email || !password) {
+        res.status(400).json({ message: 'Email y contraseña son requeridos' })
+        return
+    }
+
+    console.info(`Login attempt for user: ${email} with password: ${password}`)
+
+    const { user, message } = await localLogin(email, password)
+    if (!user) {
+        res.status(401).json({ message })
+        return
+    }
+
+    res.status(200).json({ user })
+})
+
 export default Router
